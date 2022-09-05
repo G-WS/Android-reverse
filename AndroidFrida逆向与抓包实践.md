@@ -44,3 +44,20 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 sh Miniconda3-latest-Linux-x86_64.sh
 ```
 
+运行最后一条命令后会先要求阅读Lisense阅读完毕后输入yes
+
+在提示需要手动执行一次conda init命令时输入yes，才能真正将conda安装成功。
+
+安装完后重启一次terminal，执行conda create -n py380 python=3.8.0命令安装指定版本的python，其中py380为安装时conda激活Python3.8.0之后的代称，若想使用特定的python版本，可以使用
+
+```
+conda activate py380
+```
+
+来激活对应的版本，在不需要使用该特定版本时，则可执行
+
+```
+conda deactivate
+```
+
+命令来退出
