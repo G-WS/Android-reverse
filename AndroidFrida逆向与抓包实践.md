@@ -61,3 +61,27 @@ conda deactivate
 ```
 
 命令来退出
+
+配置安装htop工具，它是加强版的top工具，htop可以动态查看当前活跃的，系统占用率高的进程
+
+uptime是开机时间，load average是平均载荷
+
+通过
+
+```
+apt-get install htop
+```
+
+命令安装
+
+在终端中输入htop即可使用。
+
+系统网络负载工具jnettop
+
+通过
+
+```
+apt-get install jnettop
+```
+
+命令下载
