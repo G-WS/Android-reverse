@@ -22,11 +22,13 @@ libs->.jar
 
 src->存放Java文件
 
-res->布局文件、图片文件、字符串资源等
+res->布局文件、图片文件、values文件、字符串资源等
 
 AndroidManifest.xml配置文件
 
 上述的android项目结构较老旧，以新版本为主
+
+
 
 
 
@@ -57,4 +59,32 @@ adb install 电脑上APK的路径
 也可以直接拖进去安装
 
 ## 2、分析Android程序
+
+将APK文件扩展名修改为.zip后，可以获得一个压缩包，解压缩后获得的是未经过反编译的APK文件压缩包，其中
+
+Android安装包文件目录
+
+res->资源文件（布局文件，图片，菜单）
+
+META-INF->签名文件夹
+
+resources.arsc->包含一些编译过程中遇到的一些信息，有关资源文件的一些内容
+
+classes.dex->可执行文件
+
+AndroidManifesst.xml->配置文件
+
+
+
+反编译APK文件：
+
+工具：AndroidKiller
+
+对APK文件反编译后
+
+在工程信息界面有包名，入口
+
+
+
+
 
