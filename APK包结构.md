@@ -1,75 +1,103 @@
-# 反编译APK文件
+# AndroidFrida逆向与抓包实践
 
-## 工具：
+## 1.1虚拟机环境准备
 
-反编译工具
+使用Kali Linux：
 
-静态分析工具
+[(72条消息) 超详细的最新版 2022.2 kali 安装步骤及拍摄快照的方法_小窦。的博客-CSDN博客_kali最新版](https://blog.csdn.net/weixin_51178129/article/details/126033729)
 
-动态调试工具
+由于官网下载很慢，可以去镜像网站下载
 
-集成分析环境
+[Index of /kali-images/kali-2022.3/](http://old.kali.org/kali-images/kali-2022.3/)
 
-## 1、开发Android程序
+因为虚拟机本身时区不是东八区，需要重新设置时区。
 
-Android项目：
+启动虚拟机后，打开terminal，使用如下命令设置时区：
 
-assets->资源文件
+```sh
+dpkg-reconfigure tzdata
+在弹出的窗口中选择Asia-Shanghai
+```
 
-bin->apk程序
+另外，kali Linux系统中默认不带中文，当打开中文网页或者抓包时，若数据包的数据中有中文，则无法解析，故需要配置kali使其支持中文，执行如下命令：
 
-libs->.jar
+```
+apt update
 
-src->存放Java文件
+apt install xfonts-intl-chinese
 
-res->布局文件、图片文件、values文件、字符串资源等
+apt install ttf-wqy-microhei
+```
 
-AndroidManifest.xml配置文件
+首先，配置好adb环境
 
-上述的android项目结构较老旧，以新版本为主
+然后配置python的隔离，这里选用miniconda，因为pyenv工具的最后一步解决依赖包的问题一直很棘手，甚至可能会导致系统桌面环境崩溃
 
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x84_64.sh 
+#下载安装脚本
 
+#赋予安装脚本可执行的权限
+chmod +x Miniconda3-latest-Linux-x86_64.sh
 
+#运行安装脚本
+sh Miniconda3-latest-Linux-x86_64.sh
+```
 
+运行最后一条命令后会先要求阅读Lisense阅读完毕后输入yes
 
-APK包结构：
+在提示需要手动执行一次conda init命令时输入yes，才能真正将conda安装成功。
 
-asset：资源目录文件夹|c++游戏引擎和LUA脚本，Unity3D开发的资源文件一般放在这个目录下面
+安装完后重启一次terminal，执行conda create -n py380 python=3.8.0命令安装指定版本的python，其中py380为安装时conda激活Python3.8.0之后的代称，若想使用特定的python版本，可以使用
 
-lib：so库存放的位置|so库文件由NDK文件编译
+```
+conda activate py380
+```
 
-META-INF：用于存放签名文件
+来激活对应的版本，在不需要使用该特定版本时，则可执行
 
-res文件夹：资源目录文件|除了音频视频，一般用于Java开发的资源文件都放在这个文件夹下面
+```
+conda deactivate
+```
 
-AndroidManifest.xml：基础配置清单
+命令来退出
 
-class.dex：Java曾主要分析文件，它里面全是可执行代码，相当于Windows的PE文件
+配置安装htop工具，它是加强版的top工具，htop可以动态查看当前活跃的，系统占用率高的进程
 
-resources.arcs：存放一些工程中编译的配置文件，以及索引res目录的一些文件。
+uptime是开机时间，load average是平均载荷
 
+通过
 
+```
+apt-get install htop
+```
 
-如何安装APP
+命令安装
 
-到对应文件目录下，打开cmd
+在终端中输入htop即可使用。
 
-adb install 电脑上APK的路径
+系统网络负载工具jnettop
 
-也可以直接拖进去安装
+通过
 
-## 2、分析Android程序
+```
+apt-get install jnettop
+```
 
-将APK文件扩展名修改为.zip后，可以获得一个压缩包，解压缩后获得的是未经过反编译的APK文件压缩包，其中
+命令下载
 
-Android安装包文件目录
+该测试使用的是Nexus 5X作为测试机，首先打开测试机的设置，连续点击测试机的版本号，进入开发者模式，打开测试机的USB调试。
 
-res->资源文件（布局文件，图片，菜单）
+通过在terminal中的`adb devices`命令测试是否连接成功，成功与不成功的截图如下：
 
-META-INF->签名文件夹
+![](.\image\adbdevices.png)
 
-resources.arsc->包含一些编译过程中遇到的一些信息，有关资源文件的一些内容
+打开Bootloader锁:
 
-classes.dex->可执行文件
+打开OEM解锁
 
-AndroidManifesst.xml->配置文件
+下载镜像包https://developers.google.cn/android/images?h1=zh%3Dcn#bullhead
+
+然后刷入Android8.0的系统和TWRP获取root权限，由于magisic是一个假root，所以更推荐获取SuperSU的压缩文件通过twrp刷入，之后下载kali-nethunter的压缩包，通过twrp刷入系统，通过adb shell确认是否获取root权限，可以通过Nethunter的终端运行各种Android原本不支持的Linux命令。
+
+如果因为手机太小，可以通过配置SSH，使用xshell去连接具体参看书本《安卓Frida逆向与抓包实战（陈佳林）》
