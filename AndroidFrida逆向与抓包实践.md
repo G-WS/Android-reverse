@@ -90,7 +90,7 @@ apt-get install jnettop
 
 通过在terminal中的`adb devices`命令测试是否连接成功，成功与不成功的截图如下：
 
-![](.\image\adbdevices.png)
+![](.\\image\adbdevices.png)
 
 打开Bootloader锁:
 
