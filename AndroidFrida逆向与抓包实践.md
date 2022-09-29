@@ -85,3 +85,19 @@ apt-get install jnettop
 ```
 
 命令下载
+
+该测试使用的是Nexus 5X作为测试机，首先打开测试机的设置，连续点击测试机的版本号，进入开发者模式，打开测试机的USB调试。
+
+通过在terminal中的`adb devices`命令测试是否连接成功，成功与不成功的截图如下：
+
+![](.\image\adbdevices.png)
+
+打开Bootloader锁:
+
+打开OEM解锁
+
+下载镜像包https://developers.google.cn/android/images?h1=zh%3Dcn#bullhead
+
+然后刷入Android8.0的系统和TWRP获取root权限，由于magisic是一个假root，所以更推荐获取SuperSU的压缩文件通过twrp刷入，之后下载kali-nethunter的压缩包，通过twrp刷入系统，通过adb shell确认是否获取root权限，可以通过Nethunter的终端运行各种Android原本不支持的Linux命令。
+
+如果因为手机太小，可以通过配置SSH，使用xshell去连接具体参看书本《安卓Frida逆向与抓包实战（陈佳林）》
