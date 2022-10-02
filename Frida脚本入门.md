@@ -397,3 +397,88 @@ setImmediate(changeArgs)
 ```
 
 ## 0x03 Java层主动调用
+
+### 1、主动调用与被动调用
+
+主动调用就是强制调用一个函数去执行。相对地，被动调用是由 App按照正常逻辑去执行函数，函数的执行完全依靠与用户交互完成 程序逻辑进而间接调用到关键函数，而主动调用则可以直接调用关键 函数，主动性更强，甚至可以直接完成关键数据的“自吐”。在逆向 分析过程中，如果不想分析详细的算法逻辑，可以直接通过主动传递 参数来调用关键算法函数，忽略方法函数的实现过程直接得到密文或 者明文，可以说这是各种算法调用的“克星”。
+
+### 2、类方法与实例方法的主动调用
+
+在Java中，类中的函数可分为两种：类函数和实例方法。通俗地 讲，就是静态的方法和动态的方法。类函数使用关键字static修饰， 和对应类是绑定的，如果类函数还被public关键词修饰着，在外部就 可以直接通过类去调用；实例方法则没有关键字static修饰，在外部 只能通过创建对应类的实例再通过这个实例去调用。在Frida中主动 调用的类型会根据方法类型区分开。如果是类函数的主动调用，直接 使用Java.use()函数找到类进行调用即可；如果是实例方法的主动调 用，则需要在找到对应的实例后对方法进行调用。这里用到了Frida 中非常重要的一个API函数Java.choose()，这个函数可以在Java的堆 中寻找指定类的实例。
+
+首先，修改之前的APP MainActivity中的内容
+
+```java
+package com.example.reversedemo1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        while(true){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            fun(50,20);
+            Log.d("reverseDemo.string", fun("LowerRcAse Me!!!"));
+        }
+    }
+    void fun(int x,int y){
+        Log.d("reverseDemo", String.valueOf(x+y));
+    }
+    String fun(String x){
+        return x.toLowerCase();
+    }
+    void secret(){
+        Log.d("reverseDemo.secret", "secret: this is secret func");
+    }
+    static void staticSecret(){
+        Log.d("reverseDemo.Secret", "this is staticSecret func");
+    }
+}
+
+```
+
+在这个App中，两个新加的函数并没有被调用。接下 来，我们完成两个隐藏函数的主动调用，js脚本代码如下：
+
+```js
+function demo3(){
+    console.log("Script loaded successfully")
+    Java.perform(function(){
+        console.log("Inside java perform function")
+
+        //静态函数主动调用
+        var MainActivity = Java.use("com.example.reversedemo1.MainActivity")
+        MainActivity.staticSecret()
+        
+        //动态方法主动调用
+        Java.choose("com.example.reversedemo1.MainActivity",{
+            onMatch: function(instance){
+                console.log("instance found",instance)
+                instance.secret()
+            },
+            onComplete:function(){
+                console.log('search Complete')
+            }
+        })
+        
+    })
+}
+
+setImmediate(demo3)
+```
+
+可以发现静态的staticSecret()函数 和Hook时使用的方式大同小异，都是使用Java.use这个API去获取 MainActivity类，在获取对应的类对象后通过“.”连接符连接 staticSecret方法名，最终以和Java中一样的方式直接调用静态方法 staticSecret()函数；动态方法secret需要先通过Java.choose这个 API从内存中获取相应类的实例对象，然后才能通过这个实例对象去 调用动态的secret()函数。如果使用“MainActivity.secret();”方式 （和staticSecret()函数一样）调用，那么会报错。
+
+当将脚本注入APP后，APP运行的日志中就可以发现两个secret函数都已经执行了。
