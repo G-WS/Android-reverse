@@ -482,3 +482,124 @@ setImmediate(demo3)
 可以发现静态的staticSecret()函数 和Hook时使用的方式大同小异，都是使用Java.use这个API去获取 MainActivity类，在获取对应的类对象后通过“.”连接符连接 staticSecret方法名，最终以和Java中一样的方式直接调用静态方法 staticSecret()函数；动态方法secret需要先通过Java.choose这个 API从内存中获取相应类的实例对象，然后才能通过这个实例对象去 调用动态的secret()函数。如果使用“MainActivity.secret();”方式 （和staticSecret()函数一样）调用，那么会报错。
 
 当将脚本注入APP后，APP运行的日志中就可以发现两个secret函数都已经执行了。
+
+## 0x04 RPC及其自动化
+
+在Frida中，可以使用python完成JavaScript脚本对进程的注入以及相应的Hook。
+
+首先修改之前的MainActivity类中的代码
+
+```java
+package com.example.reversedemo1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+    private String total = "hello";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        while(true){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            fun(50,20);
+            Log.d("reverseDemo.string", fun("LowerRcAse Me!!!"));
+        }
+    }
+    void fun(int x,int y){
+        Log.d("reverseDemo", String.valueOf(x+y));
+    }
+    String fun(String x){
+        return x.toLowerCase();
+    }
+    void secret(){
+        total+=" secretFunc";
+        Log.d("reverseDemo.secret", "secret: this is secret func");
+    }
+    static void staticSecret(){
+        Log.d("reverseDemo.Secret", "this is staticSecret func");
+    }
+}
+
+```
+
+这次脚本的目的时获取total这个实例变量的值。
+
+Java中的变量也存在是否使用static修饰的区别。如果使用static修饰，可以直接通过类进行获取；实例变量，不适用static修饰，和特定的对象绑在一起。
+
+```js
+function CallSecretFunc(){
+    console.log("Script loaded successfully")
+    Java.perform(function(){
+        console.log("Inside java perform function")
+        
+        //动态方法主动调用
+        Java.choose("com.example.reversedemo1.MainActivity",{
+            onMatch: function(instance){
+                console.log("instance found",instance)
+                instance.secret()
+            },
+            onComplete:function(){
+                console.log('search Complete')
+            }
+        })
+        
+    })
+}
+function getTotalValue(){
+    Java.perform(function(){
+        var MainActivity = Java.use("com.example.reversedemo1.MainActivity")
+        Java.choose("com.example.reversedemo1.MainActivity",{
+            onMatch: function(instance){
+                console.log("total value= ",instance.total.value)
+                instance.secret()
+            },
+            onComplete:function(){
+                console.log('search Complete')
+            }
+        })
+        
+    })
+}
+
+setImmediate(getTotalValue)
+```
+
+编写的python RPC脚本如下：
+
+```python
+import frida,sys
+def on_message(message,data):
+    if message['type']=='send':
+        print("[*]{0}".format(message['payload']))
+    else:
+        print(message)
+
+device=frida.get_usb_device()
+process=device.attach("com.example.reversedemo1")
+with open('callSecret.js') as f:
+    jscode=f.read()
+    script = process.create_script(jscode)
+    script.on('message',on_message())
+    script.load()
+
+    command=""
+    while 1==1:
+        command=input("\nEnter command:\n1:Exit\n2:Call secret function\n3:Get Total Value\nchoice:")
+        if command=="1":
+            break
+        elif command=="2":
+            script.exports.callsecretfunc()
+        elif command=="3":
+            script.exports.gettotalvalue()
+```
+
