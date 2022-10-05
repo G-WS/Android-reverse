@@ -208,3 +208,33 @@ f871b(byte[100]),d(int)=16
 
 > 根据上面的分析，我们可以知道f872c就是一个计数器，而f871b数组就是一个用来记录按钮控件点击记录的数组。所以简而言之，a方法就是用来判断点击次数是否超过100次。但是我也产生了一个疑惑，为什么一定要使用byte数组呢，在Java中哪怕是byte数组也是按照正常存储的，并不存在什么10进制转二进制的陷阱。那么就接着继续分析吧！
 
+
+
+## ps：若软件为恶意软件
+
+个恶意的App打开应用后，adb连接会自动断开，并 且无法通过USB连接上去。 再次使用Jadx查看App的包结构会发现有一个USBLock的相关 类
+
+查看其中内容会发现，类中执行了一个setprop persist.sys.usb.config none 的 命 令 。 setprop 命 令 与 之 前 讲 的 getprop是相对的，setprop用于Android系统的某个属性。通过搜索 persist.sys.usb.config关键词会发现这个属性是与设置USB调试相 关的，当这个属性被设置为none时，就会导致adb调试被禁用，也就 达成了断开连接的作用。
+
+如果无法使用USB连接，就无法通过adb启动frida-server，也 就无法使用Objection进行连接，推荐使用Termux软件。Termux是一个安卓手机的 Linux模拟器，可以在手机上模拟Linux环境。它提供一个命令行界 面，让用户与系统互动。其实它就是一个普通的手机App，可以从应 用商店下载安装。Termux的界面和一个普通的终端一样。
+
+模拟器默认root过，此时只需要下载对应模拟器架构的fridaserver并用push推送到模拟器的对应目录下，这样不通过adb就可以 启动frida-server。
+
+Objection网络模式连接
+
+Objection默认使用USB模式连 接，但是可以通过-N参数使用网络模式，使用时只需要通过-h参数指 定IP地址、-p参数指定端口去实现网络模式连接。
+
+通过输入“./frida-server -l 0.0.0.0:8888”并按回车键以网络模式运行frida-server，从而监听 任何对手机8888端口的网络连接。此时，通过以下命令可以查看 frida-server监听的端口。
+
+```
+可以通过
+netstat -tulp | grep frida来验证
+```
+
+objection可以如此连接：
+
+```
+objection -N -h 192.168.31.52 -p 8888 -g
+com.shimeng.qq2693533893 explore
+```
+
