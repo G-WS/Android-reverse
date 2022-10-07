@@ -559,3 +559,5 @@ for i in range(20,30):
         script.exports.sub(str(i),str(j))
 ```
 
+
+可以简单总结如下：第一步，使用Objection快速Hook 定位；第二步，通过Frida脚本进行关键函数的逻辑修改与主动调用；第三步，将Frida脚本的主动调用结合Python完成了对关键函数的大规模实例利用。
