@@ -304,3 +304,258 @@ com.example.junior on (google: 8.1.0) [usb] # (agent) [304689] Called com.exampl
 
 ```
 
+## Frida脚本修改参数、主动调用
+
+确认了Arith类的函数sub是最终计算器减法的真实执行函数，接下来通过Frida脚本进行进一步的利用。
+
+Hook脚本如下：
+
+```js
+function main(){
+    Java.perform(function(){
+        var Arith = Java.use('com.example.junior.util.Arith')
+        Arith.sub.implementation = function(str,str2){
+            var result = this.sub(str,str2)
+            console.log('str,str2,result =>',str,str2,result)
+            //打印java调用栈
+            console.log(Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Throwable").$new()))
+            return result
+        }
+    })
+}
+setImmediate(main)
+```
+
+打印Java调用栈的代码就是将Android开发中获取调用栈的函数Log.getStackTraceString(Throwable e)翻译为JavaScript语言。
+
+在 使 用 Frida 将 代 码 注 入 App 前 ， 我 们 先 取 消 Objection 的 Hook，然后进行Frida脚本的注入。这里取消Objection对目标函数 的Hook是因为不能使用Objection和Frida对同一个函数进行Hook， 否则会报错。
+
+```
+frida -UF -l hook1.js
+```
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/VscodeWorkspace/Junior_hook]
+└─# frida -UF -l hook1.js
+     ____
+    / _  |   Frida 15.2.2 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+   . . . .   More info at https://frida.re/docs/home/
+   . . . .
+   . . . .   Connected to Nexus 5X (id=00e310eb64541e43)
+Error: sub(): has more than one overload, use .overload(<signature>) to choose from:
+        .overload('double', 'double')                                                    
+        .overload('java.lang.String', 'java.lang.String')                                
+    at X (frida/node_modules/frida-java-bridge/lib/class-factory.js:569)                 
+    at K (frida/node_modules/frida-java-bridge/lib/class-factory.js:564)                 
+    at set (frida/node_modules/frida-java-bridge/lib/class-factory.js:932)               
+    at <anonymous> (/frida/repl-2.js:3)                                                  
+    at <anonymous> (frida/node_modules/frida-java-bridge/lib/vm.js:12)                   
+    at _performPendingVmOps (frida/node_modules/frida-java-bridge/index.js:250)          
+    at <anonymous> (frida/node_modules/frida-java-bridge/index.js:225)                   
+    at <anonymous> (frida/node_modules/frida-java-bridge/lib/vm.js:12)                   
+    at _performPendingVmOpsWhenReady (frida/node_modules/frida-java-bridge/index.js:244) 
+    at perform (frida/node_modules/frida-java-bridge/index.js:204)                       
+    at main (/frida/repl-2.js:11)                                                        
+    at apply (native)                                                                    
+    at <anonymous> (frida/runtime/core.js:51)                                            
+[Nexus 5X::junior ]->
+```
+
+从这里我们可以发现sub函数进行了重载，所以我们需要修改脚本加入对于重载的选择
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/VscodeWorkspace/Junior_hook]
+└─# frida -UF -l hook1.js
+     ____
+    / _  |   Frida 15.2.2 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+   . . . .   More info at https://frida.re/docs/home/
+   . . . .
+   . . . .   Connected to Nexus 5X (id=00e310eb64541e43)
+[Nexus 5X::junior ]-> str,str2,result => 7 2 -116
+java.lang.Throwable
+        at com.example.junior.util.Arith.sub(Native Method)
+        at com.example.junior.CalculatorActivity.caculate(CalculatorActivity.java:169)
+        at com.example.junior.CalculatorActivity.onClick(CalculatorActivity.java:94)
+        at android.view.View.performClick(View.java:6294)
+        at android.view.View$PerformClick.run(View.java:24770)
+        at android.os.Handler.handleCallback(Handler.java:790)
+        at android.os.Handler.dispatchMessage(Handler.java:99)
+        at android.os.Looper.loop(Looper.java:164)
+        at android.app.ActivityThread.main(ActivityThread.java:6494)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+
+
+
+```
+
+我们会发现1-7的结果，APP页面的最终结果变成了-122
+
+这里的123直接传递实际上是有问题的，正确的传入代码如下：
+
+```js
+function main(){
+    Java.perform(function(){
+        var Arith = Java.use('com.example.junior.util.Arith')
+        Arith.sub.overload("java.lang.String","java.lang.String").implementation = function(str,str2){
+            //Arith.sub.implementation = function(str,str2){
+
+            //var result = this.sub(str,"123")
+            var JavaString = Java.use('java.lang.String')
+            var result = this.sub(str,JavaString.$new('123'))
+            console.log('str,str2,result =>',str,str2,result)
+            //打印java调用栈
+            console.log(Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Throwable").$new()))
+            return result
+        }
+    })
+}
+setImmediate(main)
+```
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/VscodeWorkspace/Junior_hook]
+└─# frida -UF -l hook1.js
+     ____
+    / _  |   Frida 15.2.2 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+   . . . .   More info at https://frida.re/docs/home/
+   . . . .
+   . . . .   Connected to Nexus 5X (id=00e310eb64541e43)
+[Nexus 5X::junior ]-> str,str2,result => 4 9 -119
+java.lang.Throwable
+        at com.example.junior.util.Arith.sub(Native Method)
+        at com.example.junior.CalculatorActivity.caculate(CalculatorActivity.java:169)
+        at com.example.junior.CalculatorActivity.onClick(CalculatorActivity.java:94)
+        at android.view.View.performClick(View.java:6294)
+        at android.view.View$PerformClick.run(View.java:24770)
+        at android.os.Handler.handleCallback(Handler.java:790)
+        at android.os.Handler.dispatchMessage(Handler.java:99)
+        at android.os.Looper.loop(Looper.java:164)
+        at android.app.ActivityThread.main(ActivityThread.java:6494)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+
+
+
+```
+
+对sub()函数的调用，我们会发现在Java 中是直接通过Arith类对象来完成对sub()函数的调用。如果还是无法 确认，则可以通过将Objection注入到应用中，再使用如下命令打印 出Airth类的所有函数：
+
+```
+om.example.junior on (google: 8.1.0) [usb] # android hooking list class_methods com.exam
+ple.junior.util.Arith
+public static java.lang.String com.example.junior.util.Arith.add(double,double)
+public static java.lang.String com.example.junior.util.Arith.add(java.lang.String,java.lang.String)
+public static java.lang.String com.example.junior.util.Arith.div(double,double)
+public static java.lang.String com.example.junior.util.Arith.div(double,double,int)
+public static java.lang.String com.example.junior.util.Arith.div(java.lang.String,java.lang.String)
+public static java.lang.String com.example.junior.util.Arith.div(java.lang.String,java.lang.String,int)
+public static java.lang.String com.example.junior.util.Arith.mul(double,double)
+public static java.lang.String com.example.junior.util.Arith.mul(java.lang.String,java.lang.String)
+public static java.lang.String com.example.junior.util.Arith.round(double,int)
+public static java.lang.String com.example.junior.util.Arith.sub(double,double)
+public static java.lang.String com.example.junior.util.Arith.sub(java.lang.String,java.lang.String)
+
+Found 11 method(s)
+
+```
+
+我们可以发现后面两条，然后编写函数调用的脚本
+
+```js
+function callSub(){
+    Java.perform(function(){
+        var Arith = Java.use('com.example.junior.util.Arith')
+        var JavaString = Java.use('java.lang.String')
+        var result = Arith.sub(JavaString.$new("123"),JavaString.$new("111"))
+        console.log("123-111=",result)
+    })
+}
+setImmediate(callSub)
+```
+
+结果如下：
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/VscodeWorkspace/Junior_hook]
+└─# frida -UF -l hook2.js
+     ____
+    / _  |   Frida 15.2.2 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+   . . . .   More info at https://frida.re/docs/home/
+   . . . .
+   . . . .   Connected to Nexus 5X (id=00e310eb64541e43)
+123-111= 12
+[Nexus 5X::junior ]->
+
+```
+
+## 规模化利用RPC
+
+批量数据的调用，就需要修改原有的主动调用脚本call.js 的内容，将原本只调用一次的sub()函数修改为可以调用多次的格式， 并且需要将完成主动调用的函数修改为导出的rpc函数。具体脚本如下：
+
+```
+function callSub(){
+    Java.perform(function(){
+        var Arith = Java.use('com.example.junior.util.Arith')
+        var JavaString = Java.use('java.lang.String')
+        var result = Arith.sub(JavaString.$new(a),JavaString.$new(b))
+        console.log(a,"-",b,"=",result)
+    })
+}
+rpc.exports = {
+    sub : callSub,
+};
+
+```
+
+python脚本如下：
+
+```
+import frida,sys
+def on_message(message,data):
+    if message['type']=='send':
+        print("[*]{0}".format(message['payload']))
+    else:
+        print(message)
+
+device = frida.get_usb_device()
+
+process = device.attach('com.example.junior')
+with open('call.js')as f:
+    jscode = f.read()
+script = process.create_script(jscode)
+
+script.on('message',on_message)
+script.load()
+
+for i in range(20,30):
+    for j in range(0,10):
+        script.exports.sub(str(i),str(j))
+```
+
