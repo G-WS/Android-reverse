@@ -2976,3 +2976,235 @@ smali
 
 ## Smali语法基础
 
+### 寄存器
+
+在Java字节码中寄存器都是32位的，可以支持任何类型，64位的数据类型（Long/Double）通过两个寄存器进行表示，寄存器命名法有p命名法和v命名法。p命名法通常用于表示函数参数，比如p0,p1等，v命名法通常用来表示函数内部的变量，比如：v0,v1等。
+
+### 数据类型
+
+数据类型有两种：
+
+- 基本数据类型
+- 引用类型（包括对象和数组）
+
+基本数据类型对照表：
+
+| 数据类型 | Java文件中的数据表示方法 |
+| -------- | ------------------------ |
+| V        | void                     |
+| Z        | boolean                  |
+| B        | byte                     |
+| S        | short                    |
+| C        | char                     |
+| I        | int                      |
+| J        | long                     |
+| F        | float                    |
+| D        | double                   |
+
+引用类型中的对象类型通常以“Lpackage/name/ObjectName;”的形式表示，通常**L表示这是一个对象类型**，**“;”标识对象名称的结束**，**中间的Package/name表示对象的包名**，**ObjectName表示对象名**，最终这样的形式相当于Java源代码中的package.name.ObjectName类的完整表示，eg：com.zhy.demo.MainActivity类会被表示为“Lcom/zhy/demo/MainActivity;”.
+
+**数组类型通常只需要在类型的前面加上“[”即可。比如，整型数 组int[]用Smali语言的形式就表示为[I，对象数组也是类似的， [Ljava/lang/String表示一个String字符串的数组类型**
+
+**“#”用于注释，类似于编写Java代码 时的“//”符号。**
+
+### 头文件
+
+打开Smali文件，它的头三行描述了当前类的一些信息，具体格式如下：
+
+```
+.class <访问权限> [关键修饰字] <类名>;
+ .super <父类名>;
+ .source <源文件名>
+```
+
+以junior.apk为例将其java和smali代码进行对比
+
+```java
+Class: Lcom/example/junior/CalculatorActivity;
+AccessFlags: public 
+SuperType: Landroid/support/v7/app/AppCompatActivity;
+Interfaces: [Landroid/view/View$OnClickListener;]
+SourceFile: SOURCE:CalculatorActivity.java
+-------------------------------------------------------
+package com.example.junior;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.example.junior.util.Arith;
+
+/* loaded from: classes.dex */
+public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
+.................
+.................
+}
+---------------------------------------------------------
+.class public Lcom/example/junior/CalculatorActivity;
+.super Landroid/support/v7/app/AppCompatActivity;
+.source "CalculatorActivity.java"
+```
+
+第一部分是Jadx编译出来的文件
+
+第二部分是Java源代码
+
+第三部分是Apktool工具编译出来的源码
+
+在Jadx中会编译出一个accessFlags，平时这个东西跟在.class后面
+
+代表的是这个类的约束域
+
+.class后面跟的是类名“Lcom/example/junior/CalculatorActivity;”的表示方式符合字节码的相关约定，表示CalculatorActivity类。.super后跟着的是类的父类，与Java中的extends关键词后跟着的AppCompatActivity类是一致的。
+
+第三行.source关键词后跟着的是当前类的源文件名。需要注意 的是，第三行的.source关键词后的文件名可以通过ProGuard优化器 去除掉。
+
+### 变量
+
+**一个Java类主要由变量和函数构成，其中变量使用.field关键词声明，而变量分为静态变量和实例变量。**
+
+其Smali文件中对应的声明也如下，.field关键词后跟着成员变 量的访问权限，与Java语言中相同，这个访问权限的值可能是 private、public、protected三种；在访问权限后实际上还可能会存 在一些修饰的关键词，包括static、final等。如果变量存在static修饰词，那么变量就成为静态变量；在修饰关键词后，就剩下字段的名称 与对应的字段类型了，最终以<字段名>:<字段类型>的格式存在。
+
+```java
+# static fields
+.field private static final TAG:Ljava/lang/String; = "CalculatorActivity"
+
+
+# instance fields
+.field private firstNum:Ljava/lang/String;
+
+.field private nextNum:Ljava/lang/String;
+
+.field private operator:Ljava/lang/String;
+
+.field private result:Ljava/lang/String;
+
+.field private showText:Ljava/lang/String;
+
+.field private tv_result:Landroid/widget/TextView;
+===============================================
+     private static final String TAG = "CalculatorActivity";
+    private TextView tv_result;
+    private String operator = BuildConfig.FLAVOR;
+    private String firstNum = BuildConfig.FLAVOR;
+    private String nextNum = BuildConfig.FLAVOR;
+    private String result = BuildConfig.FLAVOR;
+    private String showText = BuildConfig.FLAVOR;
+
+```
+
+### 方法
+
+接下来就是最后需要介绍的Java中的方法，在smali文件中，函数的生命以.method关键词开始，以.end method关键词结束，具体格式如下：
+
+```
+.method <访问权限>[修饰关键词]<方法原型>
+	<.locals/registers>
+	[.param]
+	[.line]
+	<代码>
+.end method
+```
+
+在.method关键词之后声明了访问权 限与修饰关键字，其中访问权限与修饰关键词与变量相同，在这些关 键字后跟着函数完整的签名，函数的签名主要由函数名、参数签名以及返回值类型唯一确定
+
+Smali部分onCreate()函数的签名为onCreate(Landroid/os/Bundle;)V，根据上面的介绍可 以唯一确定onCreate()函数原型为void onCreate(Bundle)，这也称 为函数的签名
+
+```
+.method protected onCreate(Landroid/os/Bundle;)V
+    .locals 1
+    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+
+    .line 12
+    invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
+
+    .line 13
+    const v0, 0x7f090023
+
+    invoke-virtual {p0, v0}, Lcom/example/junior/MainActivity;->setContentView(I)V
+
+    .line 15
+    const v0, 0x7f070042
+```
+
+在函数声明的内容中还存在.locals、.param与.line 等关键词。其中，.locals关键词用于表示函数中非参数的变量的多 少，比如OnCreate()函数只使用了v0一个非参数变量。
+
+这里有些 反编译器可能会使用.registers关键词，如果是.registers关键词则表 示函数中使用寄存器的数量，包括所有的p寄存器和v寄存器的数量， 比如Jadx就是使用.registers关键词，如下所示：
+
+```
+.method public <init>()V
+    .registers 2
+    
+                              .line 16
+    001ccc54: 7010 ab20 0100          0000: invoke-direct       {v1}, Landroid/support/v7/app/AppCompatActivity;-><init>()V # method@20ab
+                             .line 158
+    001ccc5a: 1a00 0000               0003: const-string        v0, "" # string@0000
+    001ccc5e: 5b10 3321               0005: iput-object         v0, v1, Lcom/example/junior/CalculatorActivity;->operator:Ljava/lang/String; # field@2133
+                             .line 159
+    001ccc62: 1a00 0000               0007: const-string        v0, "" # string@0000
+    001ccc66: 5b10 3121               0009: iput-object         v0, v1, Lcom/example/junior/CalculatorActivity;->firstNum:Ljava/lang/String; # field@2131
+                             .line 160
+    001ccc6a: 1a00 0000               000b: const-string        v0, "" # string@0000
+    001ccc6e: 5b10 3221               000d: iput-object         v0, v1, Lcom/example/junior/CalculatorActivity;->nextNum:Ljava/lang/String; # field@2132
+                             .line 161
+    001ccc72: 1a00 0000               000f: const-string        v0, "" # string@0000
+    001ccc76: 5b10 3421               0011: iput-object         v0, v1, Lcom/example/junior/CalculatorActivity;->result:Ljava/lang/String; # field@2134
+                             .line 162
+    001ccc7a: 1a00 0000               0013: const-string        v0, "" # string@0000
+    001ccc7e: 5b10 3521               0015: iput-object         v0, v1, Lcom/example/junior/CalculatorActivity;->showText:Ljava/lang/String; # field@2135
+    001ccc82: 0e00                    0017: return-void         
+    
+.end method
+
+```
+
+.param关键词用于声明方法中的参数 名，比如.param p1, "savedInstanceState"表明onCreate()函数的 参数名为"savedInstanceState"；.line参数则保存着相应代码在 Java源文件中的行号信息，而这个信息也是可以通过ProGuard优化器去除掉。
+
+### 指令
+
+由于smali指令过多，因此这里只挑选几种重点的指令进行介绍
+
+#### 常量型指令
+
+常量操作指令主要是const相关指令，通常用于声明一个常量，const关键词后可能会存在常量类型相关的关键词，如上上一个代码块中const v0, 0x7f090023，指令定义了一个0x7f090023保存在v0寄存器中，举个例子而“const/16 v1, 0x1e”则定义了一个数据宽度为16位的数据常量0x1e并保存在 v1寄存器中。
+
+#### 方法调用指令
+
+方法调用指令是以invoke关键词开头的一类指令，通常用于调用外部函数，基本格式为invoke-kind {vA,vB,vC},mehtod@DDDD。其中，mehtod@DDDD表示函数的 引用；vA,vB,vC则表示函数的参数，其定义顺序与调用函数的参数一 一 对 应 ；kind则代表被调用的类型，主要有static、virtual、super（被调用的函数是静态函数、正常的函数和父类函数等）
+
+```
+invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
+```
+
+这里对应着Java中的super.onCreate(savedInstanceState);，代表调用MainActivity父 类的onCreate(savedInstanceState)函数，第一个参数p0代表this 指针，第二个参数p1代表savedInstanceState参数；而invokestatic {v1, v0}, Landroid/util/Log;- >d(Ljava/lang/String;Ljava/lang/String;)I指令对应Java中调用 Log.d()函数之处，这里静态函数的第一个参数是v1。与其他类型函数不同的是，第一个参数不再是代表this指针的p0寄存器，这和Java是一致的。
+
+#### 移位指令
+
+移位指令是关于move的相关指令，通常用于赋值。当然， move关键词后也可能会存在寄存器类型的关键词，比如：move-result-object v0指令就表示将上一步的函数返回值保存到 v0寄存器中。
+
+#### 分支判断指令
+
+分支判断指令以if关键词为标志，用于比较一个寄存器中的 值与目标寄存器中的值，与Java中的if语句对应，指令格式为if-[test] v1,v2, [condition]。
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E5%AD%97%E6%AE%B5%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E5%BC%82%E5%B8%B8%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%95%B0%E6%8D%AE%E8%BF%90%E7%AE%97.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E7%A9%BA%E6%8C%87%E4%BB%A4%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4.png?raw=true)
+
+![](https://github.com/G-WS/Android-reverse/blob/main/image/%E9%94%81%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%AE%9E%E4%BE%8B%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4.png?raw=true)
