@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
 ```
 
-选定的Hook的目标函数未String fun(String x)
+选定的Hook的目标函数为String fun(String x)
 
 **首先**重新新建一个Android项目，选在EmptyActivity作为模板，成功创建后切换到工程试图后，修改AndroidManifest.xml文件在`<activity Android:name=".MainActivity">`标签前添加如下代码：
 
