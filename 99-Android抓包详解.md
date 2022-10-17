@@ -3693,4 +3693,34 @@ com.tencent.qqmusiclite on (google: 8.1.0) [usb] # (agent) [009630] Called r.k0.
 
 ```
 
-对于无意义的字符如何抗混淆在《安卓Frida逆向与抓包》p241
+用到的一个工具是OkHttpLogger-Frida该脚本通过Frida实现拦截okhttp。
+
+项目地址如下：
+
+[siyujie/OkHttpLogger-Frida: Frida 实现拦截okhttp的脚本 (github.com)](https://github.com/siyujie/okhttpLogger-Frida)
+
+原理：由于所有使用okhttp框架的APP发出的请求都是通过RealCall.java发出的，那么我们可以hook此类拿到request和response，也可以缓存下来每一个请求的call对象，进行再次请求，所以选择了此处进行hook。Find前新增check，根据特征类寻找是否使用了okhttp3库，如果没有特征类，则说明美欧使用okhttp，找到特征类，则说明使用了okhttp的库，并打印出来是否被混淆。
+
+**使用说明**
+
+> ① 首先将 `okhttpfind.dex` 拷贝到 `/data/local/tmp/` 目录下。 [okhttpfind.dex源码链接](https://github.com/siyujie/okhttp_find)
+
+执行命令启动`frida -U -l okhttp_poker.js -f com.example.demo --no-pause` 可追加 `-o [output filepath]`保存到文件
+
+> ② 调用函数开始执行
+
+- **find() 要等完全启动并执行过网络请求后再进行调用**
+- **hold() 要等完全启动再进行调用**
+- **history() & resend() 只有可以重新发送的请求**
+
+**函数**：
+
+```
+  `find()`                                         检查是否使用了Okhttp & 是否可能被混淆 & 寻找okhttp3关键类及函数	
+  `switchLoader(\"okhttp3.OkHttpClient\")`         参数：静态分析到的okhttpclient类名
+  `hold()`                                         开启HOOK拦截
+  `history()`                                      打印可重新发送的请求
+  `resend(index)`                                  重新发送请求
+```
+
+#### 
