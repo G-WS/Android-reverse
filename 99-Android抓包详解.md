@@ -1891,3 +1891,1806 @@ com.cz.babySister on (google: 8.1.0) [usb] # (agent) [762801] Called com.cz.baby
 但是该方法存在问题：
 
 如果App通信是使用 第三方网络框架而App本身又存在着强度非常大的混淆，将App中一 些可以用来快速定位关键网络框架的关键字混淆成了无意义的字符， 那么Hook抓包定位的方式就失效了。
+
+对混淆的尝试：
+
+目标QQ音乐：
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/桌面]
+└─# cd ~/.objection/                     
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# rm objection.log
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# objection -g QQ音乐简洁版 explore
+Using USB device `Nexus 5X`
+Agent injected and responds ok!
+
+     _   _         _   _
+ ___| |_|_|___ ___| |_|_|___ ___
+| . | . | | -_|  _|  _| | . |   |
+|___|___| |___|___|_| |_|___|_|_|
+      |___|(object)inject(ion) v1.11.0
+
+     Runtime Mobile Exploration
+        by: @leonjza from @sensepost
+
+[tab] for command suggestions
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # android hooking list classes
+$Proxy0
+$Proxy1
+$Proxy2
+$Proxy3
+$Proxy4
+[B
+[C
+[D
+[F
+[I
+[J
+[Landroid.animation.Animator;
+[Landroid.animation.Keyframe$FloatKeyframe;
+[Landroid.animation.Keyframe$IntKeyframe;
+[Landroid.animation.PropertyValuesHolder;
+[Landroid.app.LoaderManagerImpl;
+[Landroid.app.NotificationChannel;
+[Landroid.content.Intent;
+[Landroid.content.pm.ActivityInfo;
+[Landroid.content.pm.ConfigurationInfo;
+[Landroid.content.pm.FeatureGroupInfo;
+[Landroid.content.pm.FeatureInfo;
+[Landroid.content.pm.InstrumentationInfo;
+[Landroid.content.pm.PathPermission;
+[Landroid.content.pm.PermissionInfo;
+[Landroid.content.pm.ProviderInfo;
+[Landroid.content.pm.ServiceInfo;
+[Landroid.content.pm.Signature;
+[Landroid.content.res.Configuration;
+[Landroid.content.res.StringBlock;
+[Landroid.content.res.XmlBlock;
+[Landroid.database.sqlite.SQLiteConnection$Operation;
+[Landroid.database.sqlite.SQLiteConnectionPool$AcquiredConnectionStatus;
+[Landroid.graphics.Bitmap$CompressFormat;
+[Landroid.graphics.Bitmap$Config;
+[Landroid.graphics.Bitmap;
+[Landroid.graphics.Canvas$EdgeType;
+[Landroid.graphics.ColorSpace$Adaptation;
+[Landroid.graphics.ColorSpace$Model;
+[Landroid.graphics.ColorSpace$Named;
+[Landroid.graphics.ColorSpace;
+[Landroid.graphics.FontFamily;
+[Landroid.graphics.Interpolator$Result;
+[Landroid.graphics.Matrix$ScaleToFit;
+[Landroid.graphics.Matrix;
+[Landroid.graphics.Paint$Align;
+[Landroid.graphics.Paint$Cap;
+[Landroid.graphics.Paint$Join;
+[Landroid.graphics.Paint$Style;
+[Landroid.graphics.Path$Direction;
+[Landroid.graphics.Path$FillType;
+[Landroid.graphics.Path$Op;
+[Landroid.graphics.Point;
+[Landroid.graphics.PorterDuff$Mode;
+[Landroid.graphics.Rect;
+[Landroid.graphics.Region$Op;
+[Landroid.graphics.Shader$TileMode;
+[Landroid.graphics.Typeface;
+[Landroid.graphics.drawable.Drawable;
+[Landroid.graphics.drawable.GradientDrawable$Orientation;
+[Landroid.graphics.drawable.LayerDrawable$ChildDrawable;
+[Landroid.graphics.fonts.FontVariationAxis;
+[Landroid.hardware.camera2.params.Face;
+[Landroid.hardware.camera2.params.HighSpeedVideoConfiguration;
+[Landroid.hardware.camera2.params.MeteringRectangle;
+[Landroid.hardware.camera2.params.StreamConfiguration;
+[Landroid.hardware.camera2.params.StreamConfigurationDuration;
+[Landroid.hardware.soundtrigger.SoundTrigger$ConfidenceLevel;
+[Landroid.hardware.soundtrigger.SoundTrigger$Keyphrase;
+[Landroid.hardware.soundtrigger.SoundTrigger$KeyphraseRecognitionExtra;
+[Landroid.icu.impl.CacheValue$Strength;
+[Landroid.icu.impl.CurrencyData$CurrencySpacingInfo$SpacingPattern;
+[Landroid.icu.impl.CurrencyData$CurrencySpacingInfo$SpacingType;
+[Landroid.icu.impl.ICUResourceBundle$OpenType;
+[Landroid.icu.impl.Trie2$ValueWidth;
+[Landroid.icu.impl.UCharacterProperty$BinaryProperty;
+[Landroid.icu.impl.UCharacterProperty$IntProperty;
+[Landroid.icu.lang.UScript$ScriptUsage;
+[Landroid.icu.text.DisplayContext$Type;
+[Landroid.icu.text.DisplayContext;
+[Landroid.icu.text.TimeZoneNames$NameType;
+[Landroid.icu.text.UnicodeSet;
+[Landroid.icu.util.BytesTrie$Result;
+[Landroid.icu.util.Currency$CurrencyUsage;
+[Landroid.icu.util.ULocale$Category;
+[Landroid.icu.util.ULocale;
+[Landroid.icu.util.UResourceBundle$RootType;
+[Landroid.media.AudioGain;
+[Landroid.media.ImageReader$SurfaceImage$SurfacePlane;
+[Landroid.net.Network;
+[Landroid.net.NetworkInfo$DetailedState;
+[Landroid.net.NetworkInfo$State;
+[Landroid.net.NetworkInfo;
+[Landroid.net.NetworkRequest$Type;
+[Landroid.net.wifi.SupplicantState;
+[Landroid.os.AsyncTask$Status;
+[Landroid.os.IBinder;
+[Landroid.os.MessageQueue$IdleHandler;
+[Landroid.os.Parcel;
+[Landroid.os.PatternMatcher;
+[Landroid.os.storage.StorageVolume;
+[Landroid.system.StructIfaddrs;
+[Landroid.system.StructPollfd;
+[Landroid.text.FontConfig$Alias;
+[Landroid.text.FontConfig$Family;
+[Landroid.text.FontConfig$Font;
+[Landroid.text.HtmlToSpannedConverter$Href;
+[Landroid.text.Hyphenator$HyphenationData;
+[Landroid.text.InputFilter;
+[Landroid.text.Layout$Alignment;
+[Landroid.text.Layout$Directions;
+[Landroid.text.MeasuredText;
+[Landroid.text.SpanWatcher;
+[Landroid.text.TextLine;
+[Landroid.text.TextUtils$TruncateAt;
+[Landroid.text.TextWatcher;
+[Landroid.text.method.TextKeyListener$Capitalize;
+[Landroid.text.method.TextKeyListener;
+[Landroid.text.style.CharacterStyle;
+[Landroid.text.style.ClickableSpan;
+[Landroid.text.style.LineBackgroundSpan;
+[Landroid.text.style.MetricAffectingSpan;
+[Landroid.text.style.ParagraphStyle;
+[Landroid.text.style.ReplacementSpan;
+[Landroid.text.style.SuggestionSpan;
+[Landroid.util.LongSparseArray;
+[Landroid.util.Pair;
+[Landroid.util.Range;
+[Landroid.util.Rational;
+[Landroid.util.Size;
+[Landroid.view.Choreographer$CallbackQueue;
+[Landroid.view.Display$Mode;
+[Landroid.view.HandlerActionQueue$HandlerAction;
+[Landroid.view.MotionEvent$PointerCoords;
+[Landroid.view.MotionEvent$PointerProperties;
+[Landroid.view.View;
+[Landroid.widget.ImageView$ScaleType;
+[Landroid.widget.TextView$BufferType;
+[Landroid.widget.TextView$ChangeWatcher;
+[Landroidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState;
+[Landroidx.compose.foundation.layout.Direction;
+[Landroidx.compose.foundation.layout.LayoutOrientation;
+[Landroidx.compose.foundation.layout.SizeMode;
+[Landroidx.compose.runtime.InvalidationResult;
+[Landroidx.compose.runtime.Recomposer$State;
+[Landroidx.compose.runtime.snapshots.SnapshotStateObserver$a;
+[Landroidx.compose.ui.focus.FocusStateImpl;
+[Landroidx.compose.ui.input.pointer.PointerEventPass;
+[Landroidx.compose.ui.input.pointer.SuspendingPointerInputFilter$a;
+[Landroidx.compose.ui.node.LayoutNode$LayoutState;
+[Landroidx.compose.ui.node.LayoutNode$UsageByParent;
+[Landroidx.compose.ui.node.LayoutNode;
+[Landroidx.compose.ui.platform.TextToolbarStatus;
+[Landroidx.compose.ui.unit.LayoutDirection;
+[Landroidx.constraintlayout.compose.LayoutInfoFlags;
+[Landroidx.constraintlayout.core.SolverVariable$Type;
+[Landroidx.constraintlayout.core.SolverVariable;
+[Landroidx.constraintlayout.core.state.State$Constraint;
+[Landroidx.constraintlayout.core.widgets.ConstraintAnchor$Type;
+[Landroidx.constraintlayout.core.widgets.ConstraintAnchor;
+[Landroidx.constraintlayout.core.widgets.ConstraintWidget$DimensionBehaviour;
+[Landroidx.constraintlayout.core.widgets.ConstraintWidget;
+[Landroidx.constraintlayout.core.widgets.analyzer.WidgetRun;
+[Landroidx.constraintlayout.solver.SolverVariable$Type;
+[Landroidx.constraintlayout.solver.SolverVariable;
+[Landroidx.constraintlayout.solver.widgets.ConstraintAnchor$Type;
+[Landroidx.constraintlayout.solver.widgets.ConstraintAnchor;
+[Landroidx.constraintlayout.solver.widgets.ConstraintWidget$DimensionBehaviour;
+[Landroidx.constraintlayout.solver.widgets.ConstraintWidget;
+[Landroidx.constraintlayout.solver.widgets.analyzer.WidgetRun;
+[Landroidx.fragment.app.SpecialEffectsController$Operation$LifecycleImpact;
+[Landroidx.fragment.app.SpecialEffectsController$Operation$State;
+[Landroidx.lifecycle.Lifecycle$Event;
+[Landroidx.lifecycle.Lifecycle$State;
+[Landroidx.recyclerview.widget.RecyclerView$Adapter$StateRestorationPolicy;
+[Landroidx.room.RoomDatabase$JournalMode;
+[Lcoil.request.CachePolicy;
+[Lcoil.size.Precision;
+[Lcom.android.internal.policy.PhoneWindow$PanelFeatureState;
+[Lcom.android.internal.telephony.PhoneConstants$State;
+[Lcom.android.okhttp.CipherSuite;
+[Lcom.android.okhttp.Protocol;
+[Lcom.android.okhttp.TlsVersion;
+[Lcom.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+[Lcom.android.org.conscrypt.OpenSSLCipher$Mode;
+[Lcom.android.org.conscrypt.OpenSSLCipher$Padding;
+[Lcom.android.org.conscrypt.OpenSSLX509CertPath$Encoding;
+[Lcom.bumptech.glide.MemoryCategory;
+[Lcom.bumptech.glide.Priority;
+[Lcom.bumptech.glide.load.DataSource;
+[Lcom.bumptech.glide.load.DecodeFormat;
+[Lcom.bumptech.glide.load.EncodeStrategy;
+[Lcom.bumptech.glide.load.ImageHeaderParser$ImageType;
+[Lcom.bumptech.glide.load.PreferredColorSpace;
+[Lcom.bumptech.glide.load.engine.DecodeJob$RunReason;
+[Lcom.bumptech.glide.load.engine.DecodeJob$Stage;
+[Lcom.bumptech.glide.load.resource.bitmap.DownsampleStrategy$SampleSizeRounding;
+[Lcom.bumptech.glide.request.SingleRequest$Status;
+[Lcom.google.android.material.navigation.NavigationBarItemView;
+[Lcom.google.gson.FieldNamingPolicy;
+[Lcom.google.gson.LongSerializationPolicy;
+[Lcom.google.gson.stream.JsonToken;
+[Lcom.gyf.immersionbar.BarHide;
+[Lcom.tencent.base.os.info.AccessPoint;
+[Lcom.tencent.base.os.info.NetworkType;
+[Lcom.tencent.base.os.info.ServiceProvider;
+[Lcom.tencent.beacon.base.net.RequestType;
+[Lcom.tencent.beacon.event.open.EventType;
+[Lcom.tencent.beacon.module.ModuleName;
+[Lcom.tencent.mtt.hippy.HippyAPIProvider;
+[Lcom.tencent.mtt.hippy.HippyEngine$EngineMode;
+[Lcom.tencent.mtt.hippy.HippyEngine$EngineState;
+[Lcom.tencent.mtt.hippy.HippyEngine$EngineType;
+[Lcom.tencent.mtt.hippy.annotation.HippyNativeModule$Thread;
+[Lcom.tencent.qimei.r.e$a;
+
+```
+
+然后查看日志文件，寻找okhttp
+
+```
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# ls
+objection_history  objection.log  objection_old.log  objectionTest.log  plugins  version_info
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# mv objection.log objectionTest1.log
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# cat objectionTest1.log |grep -i HttpURLConnection
+java.net.HttpURLConnection
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# cat objectionTest1.log |grep -i okhttp3          
+[Lokhttp3.Protocol;
+[Lokhttp3.TlsVersion;
+com.bumptech.glide.integration.okhttp3.OkHttpGlideModule
+okhttp3.Protocol
+okhttp3.TlsVersion
+okhttp3.internal.connection.RouteException
+                                                                                                                                   
+(base) ┌──(root㉿kali)-[~/.objection]
+└─# cat objectionTest1.log |grep -i okhttp 
+[Lcom.android.okhttp.CipherSuite;
+[Lcom.android.okhttp.Protocol;
+[Lcom.android.okhttp.TlsVersion;
+[Lokhttp3.Protocol;
+[Lokhttp3.TlsVersion;
+com.android.okhttp.Address
+com.android.okhttp.Authenticator
+com.android.okhttp.CacheControl$Builder
+com.android.okhttp.CertificatePinner$Builder
+com.android.okhttp.CipherSuite
+com.android.okhttp.ConfigAwareConnectionPool
+com.android.okhttp.ConfigAwareConnectionPool$1
+com.android.okhttp.Connection
+com.android.okhttp.ConnectionPool$1
+com.android.okhttp.ConnectionSpec
+com.android.okhttp.ConnectionSpec$Builder
+com.android.okhttp.Dispatcher
+com.android.okhttp.Dns
+com.android.okhttp.Dns$1
+com.android.okhttp.Handshake
+com.android.okhttp.Headers
+com.android.okhttp.Headers$Builder
+com.android.okhttp.HttpHandler
+com.android.okhttp.HttpHandler$CleartextURLFilter
+com.android.okhttp.HttpUrl$Builder
+com.android.okhttp.HttpsHandler
+com.android.okhttp.OkHttpClient
+com.android.okhttp.OkHttpClient$1
+com.android.okhttp.OkUrlFactory
+com.android.okhttp.Protocol
+com.android.okhttp.Request
+com.android.okhttp.Request$Builder
+com.android.okhttp.RequestBody
+com.android.okhttp.RequestBody$2
+com.android.okhttp.Response
+com.android.okhttp.Response$Builder
+com.android.okhttp.ResponseBody
+com.android.okhttp.Route
+com.android.okhttp.TlsVersion
+com.android.okhttp.internal.ConnectionSpecSelector
+com.android.okhttp.internal.Internal
+com.android.okhttp.internal.OptionalMethod
+com.android.okhttp.internal.RouteDatabase
+com.android.okhttp.internal.URLFilter
+com.android.okhttp.internal.Util$1
+com.android.okhttp.internal.http.CacheStrategy
+com.android.okhttp.internal.http.CacheStrategy$Factory
+com.android.okhttp.internal.http.Http1xStream
+com.android.okhttp.internal.http.Http1xStream$AbstractSource
+com.android.okhttp.internal.http.Http1xStream$ChunkedSource
+com.android.okhttp.internal.http.Http1xStream$FixedLengthSource
+com.android.okhttp.internal.http.HttpEngine$1
+com.android.okhttp.internal.http.HttpMethod
+com.android.okhttp.internal.http.HttpStream
+com.android.okhttp.internal.http.OkHeaders$1
+com.android.okhttp.internal.http.RealResponseBody
+com.android.okhttp.internal.http.RequestException
+com.android.okhttp.internal.http.RequestLine
+com.android.okhttp.internal.http.RetryableSink
+com.android.okhttp.internal.http.RouteSelector
+com.android.okhttp.internal.http.StatusLine
+com.android.okhttp.internal.http.StreamAllocation
+com.android.okhttp.internal.huc.DelegatingHttpsURLConnection
+com.android.okhttp.internal.huc.HttpsURLConnectionImpl
+com.android.okhttp.internal.tls.OkHostnameVerifier
+com.android.okhttp.okio.AsyncTimeout
+com.android.okhttp.okio.AsyncTimeout$1
+com.android.okhttp.okio.AsyncTimeout$2
+com.android.okhttp.okio.AsyncTimeout$Watchdog
+com.android.okhttp.okio.BufferedSink
+com.android.okhttp.okio.BufferedSource
+com.android.okhttp.okio.ForwardingTimeout
+com.android.okhttp.okio.GzipSource
+com.android.okhttp.okio.InflaterSource
+com.android.okhttp.okio.Okio$1
+com.android.okhttp.okio.Okio$2
+com.android.okhttp.okio.Okio$3
+com.android.okhttp.okio.RealBufferedSink
+com.android.okhttp.okio.RealBufferedSink$1
+com.android.okhttp.okio.RealBufferedSource
+com.android.okhttp.okio.RealBufferedSource$1
+com.android.okhttp.okio.Segment
+com.android.okhttp.okio.Sink
+com.android.okhttp.okio.Source
+com.android.okhttp.okio.Timeout
+com.android.okhttp.okio.Timeout$1
+com.bumptech.glide.integration.okhttp3.OkHttpGlideModule
+okhttp3.Protocol
+okhttp3.TlsVersion
+okhttp3.internal.connection.RouteException
+                                                
+```
+
+可以看到hook中显示
+
+```
+(base) ┌──(root㉿kali)-[/home/zhy/桌面]
+└─# objection -g QQ音乐简洁版 explore -c "2.txt"
+Using USB device `Nexus 5X`
+Agent injected and responds ok!
+Running commands from file...
+Running: 'android hooking watch class com.android.okhttp.Address':
+
+(agent) Hooking com.android.okhttp.Address.equals(java.lang.Object)
+(agent) Hooking com.android.okhttp.Address.getAuthenticator()
+(agent) Hooking com.android.okhttp.Address.getCertificatePinner()
+(agent) Hooking com.android.okhttp.Address.getConnectionSpecs()
+(agent) Hooking com.android.okhttp.Address.getDns()
+(agent) Hooking com.android.okhttp.Address.getHostnameVerifier()
+(agent) Hooking com.android.okhttp.Address.getProtocols()
+(agent) Hooking com.android.okhttp.Address.getProxy()
+(agent) Hooking com.android.okhttp.Address.getProxySelector()
+(agent) Hooking com.android.okhttp.Address.getSocketFactory()
+(agent) Hooking com.android.okhttp.Address.getSslSocketFactory()
+(agent) Hooking com.android.okhttp.Address.getUriHost()
+(agent) Hooking com.android.okhttp.Address.getUriPort()
+(agent) Hooking com.android.okhttp.Address.hashCode()
+(agent) Hooking com.android.okhttp.Address.url()
+(agent) Registering job 008597. Type: watch-class for: com.android.okhttp.Address
+Running: 'android hooking watch class com.android.okhttp.Authenticator':
+
+(agent) Hooking com.android.okhttp.Authenticator.authenticate(java.net.Proxy, com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Authenticator.authenticateProxy(java.net.Proxy, com.android.okhttp.Response)
+(agent) Registering job 506643. Type: watch-class for: com.android.okhttp.Authenticator
+Running: 'android hooking watch class com.android.okhttp.CacheControl$Builder':
+
+(agent) Hooking com.android.okhttp.CacheControl$Builder.build()
+(agent) Hooking com.android.okhttp.CacheControl$Builder.maxAge(int, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.CacheControl$Builder.maxStale(int, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.CacheControl$Builder.minFresh(int, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.CacheControl$Builder.noCache()
+(agent) Hooking com.android.okhttp.CacheControl$Builder.noStore()
+(agent) Hooking com.android.okhttp.CacheControl$Builder.noTransform()
+(agent) Hooking com.android.okhttp.CacheControl$Builder.onlyIfCached()
+(agent) Registering job 354320. Type: watch-class for: com.android.okhttp.CacheControl$Builder
+Running: 'android hooking watch class com.android.okhttp.CertificatePinner$Builder':
+
+(agent) Hooking com.android.okhttp.CertificatePinner$Builder.-get0(com.android.okhttp.CertificatePinner$Builder)
+(agent) Hooking com.android.okhttp.CertificatePinner$Builder.add(java.lang.String, [Ljava.lang.String;)
+(agent) Hooking com.android.okhttp.CertificatePinner$Builder.build()
+(agent) Registering job 517411. Type: watch-class for: com.android.okhttp.CertificatePinner$Builder
+Running: 'android hooking watch class com.android.okhttp.CipherSuite':
+
+(agent) Hooking com.android.okhttp.CipherSuite.forJavaName(java.lang.String)
+(agent) Hooking com.android.okhttp.CipherSuite.valueOf(java.lang.String)
+(agent) Hooking com.android.okhttp.CipherSuite.valueOf()
+(agent) Hooking com.android.okhttp.CipherSuite.values()
+(agent) Registering job 096561. Type: watch-class for: com.android.okhttp.CipherSuite
+Running: 'android hooking watch class com.android.okhttp.ConfigAwareConnectionPool':
+
+(agent) Hooking com.android.okhttp.ConfigAwareConnectionPool.-set0(com.android.okhttp.ConfigAwareConnectionPool, com.android.okhttp.ConnectionPool)                                                                                                                   
+(agent) Hooking com.android.okhttp.ConfigAwareConnectionPool.getInstance()
+(agent) Hooking com.android.okhttp.ConfigAwareConnectionPool.get()
+(agent) Registering job 471925. Type: watch-class for: com.android.okhttp.ConfigAwareConnectionPool
+Running: 'android hooking watch class com.android.okhttp.ConfigAwareConnectionPool$1':
+
+(agent) Hooking com.android.okhttp.ConfigAwareConnectionPool$1.onNetworkConfigurationChanged()
+(agent) Registering job 230728. Type: watch-class for: com.android.okhttp.ConfigAwareConnectionPool$1
+Running: 'android hooking watch class com.android.okhttp.Connection':
+
+(agent) Hooking com.android.okhttp.Connection.getHandshake()
+(agent) Hooking com.android.okhttp.Connection.getProtocol()
+(agent) Hooking com.android.okhttp.Connection.getRoute()
+(agent) Hooking com.android.okhttp.Connection.getSocket()
+(agent) Registering job 634355. Type: watch-class for: com.android.okhttp.Connection
+Running: 'android hooking watch class com.android.okhttp.ConnectionPool$1':
+
+(agent) Hooking com.android.okhttp.ConnectionPool$1.run()
+(agent) Registering job 552379. Type: watch-class for: com.android.okhttp.ConnectionPool$1
+Running: 'android hooking watch class com.android.okhttp.ConnectionSpec':
+
+(agent) Hooking com.android.okhttp.ConnectionSpec.-get0(com.android.okhttp.ConnectionSpec)
+(agent) Hooking com.android.okhttp.ConnectionSpec.-get1(com.android.okhttp.ConnectionSpec)
+(agent) Hooking com.android.okhttp.ConnectionSpec.-get2(com.android.okhttp.ConnectionSpec)
+(agent) Hooking com.android.okhttp.ConnectionSpec.-get3(com.android.okhttp.ConnectionSpec)
+(agent) Hooking com.android.okhttp.ConnectionSpec.nonEmptyIntersection([Ljava.lang.String;, [Ljava.lang.String;)
+(agent) Hooking com.android.okhttp.ConnectionSpec.supportedSpec(javax.net.ssl.SSLSocket, boolean)
+(agent) Hooking com.android.okhttp.ConnectionSpec.apply(javax.net.ssl.SSLSocket, boolean)
+(agent) Hooking com.android.okhttp.ConnectionSpec.cipherSuites()
+(agent) Hooking com.android.okhttp.ConnectionSpec.equals(java.lang.Object)
+(agent) Hooking com.android.okhttp.ConnectionSpec.hashCode()
+(agent) Hooking com.android.okhttp.ConnectionSpec.isCompatible(javax.net.ssl.SSLSocket)
+(agent) Hooking com.android.okhttp.ConnectionSpec.isTls()
+(agent) Hooking com.android.okhttp.ConnectionSpec.supportsTlsExtensions()
+(agent) Hooking com.android.okhttp.ConnectionSpec.tlsVersions()
+(agent) Hooking com.android.okhttp.ConnectionSpec.toString()
+(agent) Registering job 313542. Type: watch-class for: com.android.okhttp.ConnectionSpec
+Running: 'android hooking watch class com.android.okhttp.ConnectionSpec$Builder':
+
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.-get0(com.android.okhttp.ConnectionSpec$Builder)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.-get1(com.android.okhttp.ConnectionSpec$Builder)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.-get2(com.android.okhttp.ConnectionSpec$Builder)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.-get3(com.android.okhttp.ConnectionSpec$Builder)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.allEnabledCipherSuites()
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.allEnabledTlsVersions()
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.build()
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.cipherSuites([Lcom.android.okhttp.CipherSuite;)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.cipherSuites([Ljava.lang.String;)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.supportsTlsExtensions(boolean)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.tlsVersions([Lcom.android.okhttp.TlsVersion;)
+(agent) Hooking com.android.okhttp.ConnectionSpec$Builder.tlsVersions([Ljava.lang.String;)
+(agent) Registering job 309915. Type: watch-class for: com.android.okhttp.ConnectionSpec$Builder
+Running: 'android hooking watch class com.android.okhttp.Dispatcher':
+
+(agent) Hooking com.android.okhttp.Dispatcher.promoteCalls()
+(agent) Hooking com.android.okhttp.Dispatcher.runningCallsForHost(com.android.okhttp.Call$AsyncCall)
+(agent) Hooking com.android.okhttp.Dispatcher.cancel(java.lang.Object)
+(agent) Hooking com.android.okhttp.Dispatcher.enqueue(com.android.okhttp.Call$AsyncCall)
+(agent) Hooking com.android.okhttp.Dispatcher.executed(com.android.okhttp.Call)
+(agent) Hooking com.android.okhttp.Dispatcher.finished(com.android.okhttp.Call$AsyncCall)
+(agent) Hooking com.android.okhttp.Dispatcher.finished(com.android.okhttp.Call)
+(agent) Hooking com.android.okhttp.Dispatcher.getExecutorService()
+(agent) Hooking com.android.okhttp.Dispatcher.getMaxRequests()
+(agent) Hooking com.android.okhttp.Dispatcher.getMaxRequestsPerHost()
+(agent) Hooking com.android.okhttp.Dispatcher.getQueuedCallCount()
+(agent) Hooking com.android.okhttp.Dispatcher.getRunningCallCount()
+(agent) Hooking com.android.okhttp.Dispatcher.setMaxRequests(int)
+(agent) Hooking com.android.okhttp.Dispatcher.setMaxRequestsPerHost(int)
+(agent) Registering job 558619. Type: watch-class for: com.android.okhttp.Dispatcher
+Running: 'android hooking watch class com.android.okhttp.Dns':
+
+(agent) Hooking com.android.okhttp.Dns.lookup(java.lang.String)
+(agent) Registering job 661841. Type: watch-class for: com.android.okhttp.Dns
+Running: 'android hooking watch class com.android.okhttp.Dns$1':
+
+(agent) Hooking com.android.okhttp.Dns$1.lookup(java.lang.String)
+(agent) Registering job 516518. Type: watch-class for: com.android.okhttp.Dns$1
+Running: 'android hooking watch class com.android.okhttp.Handshake':
+
+(agent) Hooking com.android.okhttp.Handshake.get(java.lang.String, java.util.List, java.util.List)
+(agent) Hooking com.android.okhttp.Handshake.get(javax.net.ssl.SSLSession)
+(agent) Hooking com.android.okhttp.Handshake.cipherSuite()
+(agent) Hooking com.android.okhttp.Handshake.equals(java.lang.Object)
+(agent) Hooking com.android.okhttp.Handshake.hashCode()
+(agent) Hooking com.android.okhttp.Handshake.localCertificates()
+(agent) Hooking com.android.okhttp.Handshake.localPrincipal()
+(agent) Hooking com.android.okhttp.Handshake.peerCertificates()
+(agent) Hooking com.android.okhttp.Handshake.peerPrincipal()
+(agent) Registering job 379052. Type: watch-class for: com.android.okhttp.Handshake
+Running: 'android hooking watch class com.android.okhttp.Headers':
+
+(agent) Hooking com.android.okhttp.Headers.get([Ljava.lang.String;, java.lang.String)
+(agent) Hooking com.android.okhttp.Headers.get(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers.of(java.util.Map)
+(agent) Hooking com.android.okhttp.Headers.of([Ljava.lang.String;)
+(agent) Hooking com.android.okhttp.Headers.getDate(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers.name(int)
+(agent) Hooking com.android.okhttp.Headers.names()
+(agent) Hooking com.android.okhttp.Headers.newBuilder()
+(agent) Hooking com.android.okhttp.Headers.size()
+(agent) Hooking com.android.okhttp.Headers.toMultimap()
+(agent) Hooking com.android.okhttp.Headers.toString()
+(agent) Hooking com.android.okhttp.Headers.value(int)
+(agent) Hooking com.android.okhttp.Headers.values(java.lang.String)
+(agent) Registering job 352344. Type: watch-class for: com.android.okhttp.Headers
+Running: 'android hooking watch class com.android.okhttp.Headers$Builder':
+
+(agent) Hooking com.android.okhttp.Headers$Builder.-get0(com.android.okhttp.Headers$Builder)
+(agent) Hooking com.android.okhttp.Headers$Builder.checkNameAndValue(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.add(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.add(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.addLenient(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.addLenient(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.build()
+(agent) Hooking com.android.okhttp.Headers$Builder.get(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.removeAll(java.lang.String)
+(agent) Hooking com.android.okhttp.Headers$Builder.set(java.lang.String, java.lang.String)
+(agent) Registering job 433406. Type: watch-class for: com.android.okhttp.Headers$Builder
+Running: 'android hooking watch class com.android.okhttp.HttpHandler':
+
+(agent) Hooking com.android.okhttp.HttpHandler.createHttpOkUrlFactory(java.net.Proxy)
+(agent) Hooking com.android.okhttp.HttpHandler.getDefaultPort()
+(agent) Hooking com.android.okhttp.HttpHandler.newOkUrlFactory(java.net.Proxy)
+(agent) Hooking com.android.okhttp.HttpHandler.openConnection(java.net.URL)
+(agent) Hooking com.android.okhttp.HttpHandler.openConnection(java.net.URL, java.net.Proxy)
+(agent) Registering job 531407. Type: watch-class for: com.android.okhttp.HttpHandler
+Running: 'android hooking watch class com.android.okhttp.HttpHandler$CleartextURLFilter':
+
+(agent) Hooking com.android.okhttp.HttpHandler$CleartextURLFilter.checkURLPermitted(java.net.URL)
+(agent) Registering job 576302. Type: watch-class for: com.android.okhttp.HttpHandler$CleartextURLFilter
+Running: 'android hooking watch class com.android.okhttp.HttpUrl$Builder':
+
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.canonicalizeHost(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.containsInvalidHostnameAsciiCodes(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.decodeIpv4Suffix(java.lang.String, int, int, [B, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.decodeIpv6(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.domainToAscii(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.inet6AddressToAscii([B)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.isDot(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.isDotDot(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.parsePort(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.pop()
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.portColonOffset(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.push(java.lang.String, int, int, boolean, boolean)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.removeAllCanonicalQueryParameters(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.resolvePath(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.schemeDelimiterOffset(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.skipLeadingAsciiWhitespace(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.skipTrailingAsciiWhitespace(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.slashCount(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.addEncodedPathSegment(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.addEncodedQueryParameter(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.addPathSegment(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.addQueryParameter(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.build()
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.effectivePort()
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.encodedFragment(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.encodedPassword(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.encodedPath(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.encodedQuery(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.encodedUsername(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.fragment(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.host(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.parse(com.android.okhttp.HttpUrl, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.password(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.port(int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.query(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.reencodeForUri()
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.removeAllEncodedQueryParameters(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.removeAllQueryParameters(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.removePathSegment(int)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.scheme(java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.setEncodedPathSegment(int, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.setEncodedQueryParameter(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.setPathSegment(int, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.setQueryParameter(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.toString()
+(agent) Hooking com.android.okhttp.HttpUrl$Builder.username(java.lang.String)
+(agent) Registering job 949380. Type: watch-class for: com.android.okhttp.HttpUrl$Builder
+Running: 'android hooking watch class com.android.okhttp.HttpsHandler':
+
+(agent) Hooking com.android.okhttp.HttpsHandler.createHttpsOkUrlFactory(java.net.Proxy)
+(agent) Hooking com.android.okhttp.HttpsHandler.getDefaultPort()
+(agent) Hooking com.android.okhttp.HttpsHandler.newOkUrlFactory(java.net.Proxy)
+(agent) Registering job 229132. Type: watch-class for: com.android.okhttp.HttpsHandler
+Running: 'android hooking watch class com.android.okhttp.OkHttpClient':
+
+(agent) Hooking com.android.okhttp.OkHttpClient.getDefaultSSLSocketFactory()
+(agent) Hooking com.android.okhttp.OkHttpClient.cancel(java.lang.Object)
+(agent) Hooking com.android.okhttp.OkHttpClient.clone()
+(agent) Hooking com.android.okhttp.OkHttpClient.clone()
+(agent) Hooking com.android.okhttp.OkHttpClient.copyWithDefaults()
+(agent) Hooking com.android.okhttp.OkHttpClient.getAuthenticator()
+(agent) Hooking com.android.okhttp.OkHttpClient.getCache()
+(agent) Hooking com.android.okhttp.OkHttpClient.getCertificatePinner()
+(agent) Hooking com.android.okhttp.OkHttpClient.getConnectTimeout()
+(agent) Hooking com.android.okhttp.OkHttpClient.getConnectionPool()
+(agent) Hooking com.android.okhttp.OkHttpClient.getConnectionSpecs()
+(agent) Hooking com.android.okhttp.OkHttpClient.getCookieHandler()
+(agent) Hooking com.android.okhttp.OkHttpClient.getDispatcher()
+(agent) Hooking com.android.okhttp.OkHttpClient.getDns()
+(agent) Hooking com.android.okhttp.OkHttpClient.getFollowRedirects()
+(agent) Hooking com.android.okhttp.OkHttpClient.getFollowSslRedirects()
+(agent) Hooking com.android.okhttp.OkHttpClient.getHostnameVerifier()
+(agent) Hooking com.android.okhttp.OkHttpClient.getProtocols()
+(agent) Hooking com.android.okhttp.OkHttpClient.getProxy()
+(agent) Hooking com.android.okhttp.OkHttpClient.getProxySelector()
+(agent) Hooking com.android.okhttp.OkHttpClient.getReadTimeout()
+(agent) Hooking com.android.okhttp.OkHttpClient.getRetryOnConnectionFailure()
+(agent) Hooking com.android.okhttp.OkHttpClient.getSocketFactory()
+(agent) Hooking com.android.okhttp.OkHttpClient.getSslSocketFactory()
+(agent) Hooking com.android.okhttp.OkHttpClient.getWriteTimeout()
+(agent) Hooking com.android.okhttp.OkHttpClient.interceptors()
+(agent) Hooking com.android.okhttp.OkHttpClient.internalCache()
+(agent) Hooking com.android.okhttp.OkHttpClient.networkInterceptors()
+(agent) Hooking com.android.okhttp.OkHttpClient.newCall(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.OkHttpClient.routeDatabase()
+(agent) Hooking com.android.okhttp.OkHttpClient.setAuthenticator(com.android.okhttp.Authenticator)
+(agent) Hooking com.android.okhttp.OkHttpClient.setCache(com.android.okhttp.Cache)
+(agent) Hooking com.android.okhttp.OkHttpClient.setCertificatePinner(com.android.okhttp.CertificatePinner)
+(agent) Hooking com.android.okhttp.OkHttpClient.setConnectTimeout(long, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.OkHttpClient.setConnectionPool(com.android.okhttp.ConnectionPool)
+(agent) Hooking com.android.okhttp.OkHttpClient.setConnectionSpecs(java.util.List)
+(agent) Hooking com.android.okhttp.OkHttpClient.setCookieHandler(java.net.CookieHandler)
+(agent) Hooking com.android.okhttp.OkHttpClient.setDispatcher(com.android.okhttp.Dispatcher)
+(agent) Hooking com.android.okhttp.OkHttpClient.setDns(com.android.okhttp.Dns)
+(agent) Hooking com.android.okhttp.OkHttpClient.setFollowRedirects(boolean)
+(agent) Hooking com.android.okhttp.OkHttpClient.setFollowSslRedirects(boolean)
+(agent) Hooking com.android.okhttp.OkHttpClient.setHostnameVerifier(javax.net.ssl.HostnameVerifier)
+(agent) Hooking com.android.okhttp.OkHttpClient.setInternalCache(com.android.okhttp.internal.InternalCache)
+(agent) Hooking com.android.okhttp.OkHttpClient.setProtocols(java.util.List)
+(agent) Hooking com.android.okhttp.OkHttpClient.setProxy(java.net.Proxy)
+(agent) Hooking com.android.okhttp.OkHttpClient.setProxySelector(java.net.ProxySelector)
+(agent) Hooking com.android.okhttp.OkHttpClient.setReadTimeout(long, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.OkHttpClient.setRetryOnConnectionFailure(boolean)
+(agent) Hooking com.android.okhttp.OkHttpClient.setSocketFactory(javax.net.SocketFactory)
+(agent) Hooking com.android.okhttp.OkHttpClient.setSslSocketFactory(javax.net.ssl.SSLSocketFactory)
+(agent) Hooking com.android.okhttp.OkHttpClient.setWriteTimeout(long, java.util.concurrent.TimeUnit)
+(agent) Registering job 201392. Type: watch-class for: com.android.okhttp.OkHttpClient
+Running: 'android hooking watch class com.android.okhttp.OkHttpClient$1':
+
+(agent) Hooking com.android.okhttp.OkHttpClient$1.addLenient(com.android.okhttp.Headers$Builder, java.lang.String)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.addLenient(com.android.okhttp.Headers$Builder, java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.apply(com.android.okhttp.ConnectionSpec, javax.net.ssl.SSLSocket, boolean)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.callEngineGetStreamAllocation(com.android.okhttp.Call)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.callEnqueue(com.android.okhttp.Call, com.android.okhttp.Callback, boolean)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.connectionBecameIdle(com.android.okhttp.ConnectionPool, com.android.okhttp.internal.io.RealConnection)                                                                                                              
+(agent) Hooking com.android.okhttp.OkHttpClient$1.get(com.android.okhttp.ConnectionPool, com.android.okhttp.Address, com.android.okhttp.internal.http.StreamAllocation)                                                                                               
+(agent) Hooking com.android.okhttp.OkHttpClient$1.getHttpUrlChecked(java.lang.String)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.internalCache(com.android.okhttp.OkHttpClient)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.put(com.android.okhttp.ConnectionPool, com.android.okhttp.internal.io.RealConnection)                                                                                                                               
+(agent) Hooking com.android.okhttp.OkHttpClient$1.routeDatabase(com.android.okhttp.ConnectionPool)
+(agent) Hooking com.android.okhttp.OkHttpClient$1.setCache(com.android.okhttp.OkHttpClient, com.android.okhttp.internal.InternalCache)                                                                                                                                
+(agent) Registering job 742844. Type: watch-class for: com.android.okhttp.OkHttpClient$1
+Running: 'android hooking watch class com.android.okhttp.OkUrlFactory':
+
+(agent) Hooking com.android.okhttp.OkUrlFactory.client()
+(agent) Hooking com.android.okhttp.OkUrlFactory.clone()
+(agent) Hooking com.android.okhttp.OkUrlFactory.clone()
+(agent) Hooking com.android.okhttp.OkUrlFactory.createURLStreamHandler(java.lang.String)
+(agent) Hooking com.android.okhttp.OkUrlFactory.open(java.net.URL)
+(agent) Hooking com.android.okhttp.OkUrlFactory.open(java.net.URL, java.net.Proxy)
+(agent) Hooking com.android.okhttp.OkUrlFactory.setUrlFilter(com.android.okhttp.internal.URLFilter)
+(agent) Registering job 911348. Type: watch-class for: com.android.okhttp.OkUrlFactory
+Running: 'android hooking watch class com.android.okhttp.Protocol':
+
+(agent) Hooking com.android.okhttp.Protocol.get(java.lang.String)
+(agent) Hooking com.android.okhttp.Protocol.valueOf(java.lang.String)
+(agent) Hooking com.android.okhttp.Protocol.valueOf()
+(agent) Hooking com.android.okhttp.Protocol.values()
+(agent) Hooking com.android.okhttp.Protocol.toString()
+(agent) Registering job 942232. Type: watch-class for: com.android.okhttp.Protocol
+Running: 'android hooking watch class com.android.okhttp.Request':
+
+(agent) Hooking com.android.okhttp.Request.-get0(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.Request.-get1(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.Request.-get2(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.Request.-get3(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.Request.-get4(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.Request.body()
+(agent) Hooking com.android.okhttp.Request.cacheControl()
+(agent) Hooking com.android.okhttp.Request.header(java.lang.String)
+(agent) Hooking com.android.okhttp.Request.headers()
+(agent) Hooking com.android.okhttp.Request.headers(java.lang.String)
+(agent) Hooking com.android.okhttp.Request.httpUrl()
+(agent) Hooking com.android.okhttp.Request.isHttps()
+(agent) Hooking com.android.okhttp.Request.method()
+(agent) Hooking com.android.okhttp.Request.newBuilder()
+(agent) Hooking com.android.okhttp.Request.tag()
+(agent) Hooking com.android.okhttp.Request.toString()
+(agent) Hooking com.android.okhttp.Request.uri()
+(agent) Hooking com.android.okhttp.Request.url()
+(agent) Hooking com.android.okhttp.Request.urlString()
+(agent) Registering job 848459. Type: watch-class for: com.android.okhttp.Request
+Running: 'android hooking watch class com.android.okhttp.Request$Builder':
+
+(agent) Hooking com.android.okhttp.Request$Builder.-get0(com.android.okhttp.Request$Builder)
+(agent) Hooking com.android.okhttp.Request$Builder.-get1(com.android.okhttp.Request$Builder)
+(agent) Hooking com.android.okhttp.Request$Builder.-get2(com.android.okhttp.Request$Builder)
+(agent) Hooking com.android.okhttp.Request$Builder.-get3(com.android.okhttp.Request$Builder)
+(agent) Hooking com.android.okhttp.Request$Builder.-get4(com.android.okhttp.Request$Builder)
+(agent) Hooking com.android.okhttp.Request$Builder.addHeader(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Request$Builder.build()
+(agent) Hooking com.android.okhttp.Request$Builder.cacheControl(com.android.okhttp.CacheControl)
+(agent) Hooking com.android.okhttp.Request$Builder.delete()
+(agent) Hooking com.android.okhttp.Request$Builder.delete(com.android.okhttp.RequestBody)
+(agent) Hooking com.android.okhttp.Request$Builder.get()
+(agent) Hooking com.android.okhttp.Request$Builder.head()
+(agent) Hooking com.android.okhttp.Request$Builder.header(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Request$Builder.headers(com.android.okhttp.Headers)
+(agent) Hooking com.android.okhttp.Request$Builder.method(java.lang.String, com.android.okhttp.RequestBody)
+(agent) Hooking com.android.okhttp.Request$Builder.patch(com.android.okhttp.RequestBody)
+(agent) Hooking com.android.okhttp.Request$Builder.post(com.android.okhttp.RequestBody)
+(agent) Hooking com.android.okhttp.Request$Builder.put(com.android.okhttp.RequestBody)
+(agent) Hooking com.android.okhttp.Request$Builder.removeHeader(java.lang.String)
+(agent) Hooking com.android.okhttp.Request$Builder.tag(java.lang.Object)
+(agent) Hooking com.android.okhttp.Request$Builder.url(com.android.okhttp.HttpUrl)
+(agent) Hooking com.android.okhttp.Request$Builder.url(java.lang.String)
+(agent) Hooking com.android.okhttp.Request$Builder.url(java.net.URL)
+(agent) Registering job 091262. Type: watch-class for: com.android.okhttp.Request$Builder
+Running: 'android hooking watch class com.android.okhttp.RequestBody':
+
+(agent) Hooking com.android.okhttp.RequestBody.create(com.android.okhttp.MediaType, com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.RequestBody.create(com.android.okhttp.MediaType, java.io.File)
+(agent) Hooking com.android.okhttp.RequestBody.create(com.android.okhttp.MediaType, java.lang.String)
+(agent) Hooking com.android.okhttp.RequestBody.create(com.android.okhttp.MediaType, [B)
+(agent) Hooking com.android.okhttp.RequestBody.create(com.android.okhttp.MediaType, [B, int, int)
+(agent) Hooking com.android.okhttp.RequestBody.contentLength()
+(agent) Hooking com.android.okhttp.RequestBody.contentType()
+(agent) Hooking com.android.okhttp.RequestBody.writeTo(com.android.okhttp.okio.BufferedSink)
+(agent) Registering job 328597. Type: watch-class for: com.android.okhttp.RequestBody
+Running: 'android hooking watch class com.android.okhttp.RequestBody$2':
+
+(agent) Hooking com.android.okhttp.RequestBody$2.contentLength()
+(agent) Hooking com.android.okhttp.RequestBody$2.contentType()
+(agent) Hooking com.android.okhttp.RequestBody$2.writeTo(com.android.okhttp.okio.BufferedSink)
+(agent) Registering job 749772. Type: watch-class for: com.android.okhttp.RequestBody$2
+Running: 'android hooking watch class com.android.okhttp.Response':
+
+(agent) Hooking com.android.okhttp.Response.-get0(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get1(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get2(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get3(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get4(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get5(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get6(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get7(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get8(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.-get9(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response.body()
+(agent) Hooking com.android.okhttp.Response.cacheControl()
+(agent) Hooking com.android.okhttp.Response.cacheResponse()
+(agent) Hooking com.android.okhttp.Response.challenges()
+(agent) Hooking com.android.okhttp.Response.code()
+(agent) Hooking com.android.okhttp.Response.handshake()
+(agent) Hooking com.android.okhttp.Response.header(java.lang.String)
+(agent) Hooking com.android.okhttp.Response.header(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Response.headers()
+(agent) Hooking com.android.okhttp.Response.headers(java.lang.String)
+(agent) Hooking com.android.okhttp.Response.isRedirect()
+(agent) Hooking com.android.okhttp.Response.isSuccessful()
+(agent) Hooking com.android.okhttp.Response.message()
+(agent) Hooking com.android.okhttp.Response.networkResponse()
+(agent) Hooking com.android.okhttp.Response.newBuilder()
+(agent) Hooking com.android.okhttp.Response.priorResponse()
+(agent) Hooking com.android.okhttp.Response.protocol()
+(agent) Hooking com.android.okhttp.Response.request()
+(agent) Hooking com.android.okhttp.Response.toString()
+(agent) Registering job 112119. Type: watch-class for: com.android.okhttp.Response
+Running: 'android hooking watch class com.android.okhttp.Response$Builder':
+
+(agent) Hooking com.android.okhttp.Response$Builder.-get0(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get1(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get2(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get3(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get4(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get5(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get6(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get7(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get8(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.-get9(com.android.okhttp.Response$Builder)
+(agent) Hooking com.android.okhttp.Response$Builder.checkPriorResponse(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response$Builder.checkSupportResponse(java.lang.String, com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response$Builder.addHeader(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Response$Builder.body(com.android.okhttp.ResponseBody)
+(agent) Hooking com.android.okhttp.Response$Builder.build()
+(agent) Hooking com.android.okhttp.Response$Builder.cacheResponse(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response$Builder.code(int)
+(agent) Hooking com.android.okhttp.Response$Builder.handshake(com.android.okhttp.Handshake)
+(agent) Hooking com.android.okhttp.Response$Builder.header(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.Response$Builder.headers(com.android.okhttp.Headers)
+(agent) Hooking com.android.okhttp.Response$Builder.message(java.lang.String)
+(agent) Hooking com.android.okhttp.Response$Builder.networkResponse(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response$Builder.priorResponse(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.Response$Builder.protocol(com.android.okhttp.Protocol)
+(agent) Hooking com.android.okhttp.Response$Builder.removeHeader(java.lang.String)
+(agent) Hooking com.android.okhttp.Response$Builder.request(com.android.okhttp.Request)
+(agent) Registering job 734333. Type: watch-class for: com.android.okhttp.Response$Builder
+Running: 'android hooking watch class com.android.okhttp.ResponseBody':
+
+(agent) Hooking com.android.okhttp.ResponseBody.charset()
+(agent) Hooking com.android.okhttp.ResponseBody.create(com.android.okhttp.MediaType, long, com.android.okhttp.okio.BufferedSource)
+(agent) Hooking com.android.okhttp.ResponseBody.create(com.android.okhttp.MediaType, java.lang.String)
+(agent) Hooking com.android.okhttp.ResponseBody.create(com.android.okhttp.MediaType, [B)
+(agent) Hooking com.android.okhttp.ResponseBody.byteStream()
+(agent) Hooking com.android.okhttp.ResponseBody.bytes()
+(agent) Hooking com.android.okhttp.ResponseBody.charStream()
+(agent) Hooking com.android.okhttp.ResponseBody.close()
+(agent) Hooking com.android.okhttp.ResponseBody.contentLength()
+(agent) Hooking com.android.okhttp.ResponseBody.contentType()
+(agent) Hooking com.android.okhttp.ResponseBody.source()
+(agent) Hooking com.android.okhttp.ResponseBody.string()
+(agent) Registering job 234110. Type: watch-class for: com.android.okhttp.ResponseBody
+Running: 'android hooking watch class com.android.okhttp.Route':
+
+(agent) Hooking com.android.okhttp.Route.equals(java.lang.Object)
+(agent) Hooking com.android.okhttp.Route.getAddress()
+(agent) Hooking com.android.okhttp.Route.getProxy()
+(agent) Hooking com.android.okhttp.Route.getSocketAddress()
+(agent) Hooking com.android.okhttp.Route.hashCode()
+(agent) Hooking com.android.okhttp.Route.requiresTunnel()
+(agent) Registering job 423264. Type: watch-class for: com.android.okhttp.Route
+Running: 'android hooking watch class com.android.okhttp.TlsVersion':
+
+(agent) Hooking com.android.okhttp.TlsVersion.forJavaName(java.lang.String)
+(agent) Hooking com.android.okhttp.TlsVersion.valueOf(java.lang.String)
+(agent) Hooking com.android.okhttp.TlsVersion.valueOf()
+(agent) Hooking com.android.okhttp.TlsVersion.values()
+(agent) Hooking com.android.okhttp.TlsVersion.javaName()
+(agent) Registering job 938225. Type: watch-class for: com.android.okhttp.TlsVersion
+Running: 'android hooking watch class com.android.okhttp.internal.ConnectionSpecSelector':
+
+(agent) Hooking com.android.okhttp.internal.ConnectionSpecSelector.isFallbackPossible(javax.net.ssl.SSLSocket)
+(agent) Hooking com.android.okhttp.internal.ConnectionSpecSelector.configureSecureSocket(javax.net.ssl.SSLSocket)
+(agent) Hooking com.android.okhttp.internal.ConnectionSpecSelector.connectionFailed(java.io.IOException)
+(agent) Registering job 063291. Type: watch-class for: com.android.okhttp.internal.ConnectionSpecSelector
+Running: 'android hooking watch class com.android.okhttp.internal.Internal':
+
+(agent) Hooking com.android.okhttp.internal.Internal.initializeInstanceForTests()
+(agent) Hooking com.android.okhttp.internal.Internal.addLenient(com.android.okhttp.Headers$Builder, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.Internal.addLenient(com.android.okhttp.Headers$Builder, java.lang.String, java.lang.String)                                                                                                                               
+(agent) Hooking com.android.okhttp.internal.Internal.apply(com.android.okhttp.ConnectionSpec, javax.net.ssl.SSLSocket, boolean)
+(agent) Hooking com.android.okhttp.internal.Internal.callEngineGetStreamAllocation(com.android.okhttp.Call)
+(agent) Hooking com.android.okhttp.internal.Internal.callEnqueue(com.android.okhttp.Call, com.android.okhttp.Callback, boolean)
+(agent) Hooking com.android.okhttp.internal.Internal.connectionBecameIdle(com.android.okhttp.ConnectionPool, com.android.okhttp.internal.io.RealConnection)                                                                                                           
+(agent) Hooking com.android.okhttp.internal.Internal.get(com.android.okhttp.ConnectionPool, com.android.okhttp.Address, com.android.okhttp.internal.http.StreamAllocation)                                                                                            
+(agent) Hooking com.android.okhttp.internal.Internal.getHttpUrlChecked(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.Internal.internalCache(com.android.okhttp.OkHttpClient)
+(agent) Hooking com.android.okhttp.internal.Internal.put(com.android.okhttp.ConnectionPool, com.android.okhttp.internal.io.RealConnection)                                                                                                                            
+(agent) Hooking com.android.okhttp.internal.Internal.routeDatabase(com.android.okhttp.ConnectionPool)
+(agent) Hooking com.android.okhttp.internal.Internal.setCache(com.android.okhttp.OkHttpClient, com.android.okhttp.internal.InternalCache)                                                                                                                             
+(agent) Registering job 698986. Type: watch-class for: com.android.okhttp.internal.Internal
+Running: 'android hooking watch class com.android.okhttp.internal.OptionalMethod':
+
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.getMethod(java.lang.Class)
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.getPublicMethod(java.lang.Class, java.lang.String, [Ljava.lang.Class;)
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.invoke(java.lang.Object, [Ljava.lang.Object;)
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.invokeOptional(java.lang.Object, [Ljava.lang.Object;)
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.invokeOptionalWithoutCheckedException(java.lang.Object, [Ljava.lang.Object;)                                                                                                                               
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.invokeWithoutCheckedException(java.lang.Object, [Ljava.lang.Object;)
+(agent) Hooking com.android.okhttp.internal.OptionalMethod.isSupported(java.lang.Object)
+(agent) Registering job 482159. Type: watch-class for: com.android.okhttp.internal.OptionalMethod
+Running: 'android hooking watch class com.android.okhttp.internal.RouteDatabase':
+
+(agent) Hooking com.android.okhttp.internal.RouteDatabase.connected(com.android.okhttp.Route)
+(agent) Hooking com.android.okhttp.internal.RouteDatabase.failed(com.android.okhttp.Route)
+(agent) Hooking com.android.okhttp.internal.RouteDatabase.failedRoutesCount()
+(agent) Hooking com.android.okhttp.internal.RouteDatabase.shouldPostpone(com.android.okhttp.Route)
+(agent) Registering job 628947. Type: watch-class for: com.android.okhttp.internal.RouteDatabase
+Running: 'android hooking watch class com.android.okhttp.internal.URLFilter':
+
+(agent) Hooking com.android.okhttp.internal.URLFilter.checkURLPermitted(java.net.URL)
+(agent) Registering job 892396. Type: watch-class for: com.android.okhttp.internal.URLFilter
+Running: 'android hooking watch class com.android.okhttp.internal.Util$1':
+
+(agent) Hooking com.android.okhttp.internal.Util$1.newThread(java.lang.Runnable)
+(agent) Registering job 964277. Type: watch-class for: com.android.okhttp.internal.Util$1
+Running: 'android hooking watch class com.android.okhttp.internal.http.CacheStrategy':
+
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy.isCacheable(com.android.okhttp.Response, com.android.okhttp.Request)
+(agent) Registering job 030697. Type: watch-class for: com.android.okhttp.internal.http.CacheStrategy
+Running: 'android hooking watch class com.android.okhttp.internal.http.CacheStrategy$Factory':
+
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.cacheResponseAge()
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.computeFreshnessLifetime()
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.getCandidate()
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.hasConditions(com.android.okhttp.Request)
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.isFreshnessLifetimeHeuristic()
+(agent) Hooking com.android.okhttp.internal.http.CacheStrategy$Factory.get()
+(agent) Registering job 500833. Type: watch-class for: com.android.okhttp.internal.http.CacheStrategy$Factory
+Running: 'android hooking watch class com.android.okhttp.internal.http.Http1xStream':
+
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-get0(com.android.okhttp.internal.http.Http1xStream)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-get1(com.android.okhttp.internal.http.Http1xStream)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-get2(com.android.okhttp.internal.http.Http1xStream)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-get3(com.android.okhttp.internal.http.Http1xStream)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-set0(com.android.okhttp.internal.http.Http1xStream, int)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.-wrap0(com.android.okhttp.internal.http.Http1xStream, com.android.okhttp.okio.ForwardingTimeout)                                                                                                        
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.detachTimeout(com.android.okhttp.okio.ForwardingTimeout)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.getTransferStream(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.cancel()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.createRequestBody(com.android.okhttp.Request, long)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.finishRequest()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.isClosed()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.newChunkedSink()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.newChunkedSource(com.android.okhttp.internal.http.HttpEngine)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.newFixedLengthSink(long)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.newFixedLengthSource(long)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.newUnknownLengthSource()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.openResponseBody(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.readHeaders()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.readResponse()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.readResponseHeaders()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.setHttpEngine(com.android.okhttp.internal.http.HttpEngine)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.writeRequest(com.android.okhttp.Headers, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.writeRequestBody(com.android.okhttp.internal.http.RetryableSink)
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream.writeRequestHeaders(com.android.okhttp.Request)
+(agent) Registering job 432620. Type: watch-class for: com.android.okhttp.internal.http.Http1xStream
+Running: 'android hooking watch class com.android.okhttp.internal.http.Http1xStream$AbstractSource':
+
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$AbstractSource.endOfInput()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$AbstractSource.timeout()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$AbstractSource.unexpectedEndOfInput()
+(agent) Registering job 563931. Type: watch-class for: com.android.okhttp.internal.http.Http1xStream$AbstractSource
+Running: 'android hooking watch class com.android.okhttp.internal.http.Http1xStream$ChunkedSource':
+
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$ChunkedSource.readChunkSize()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$ChunkedSource.close()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$ChunkedSource.read(com.android.okhttp.okio.Buffer, long)
+(agent) Registering job 030506. Type: watch-class for: com.android.okhttp.internal.http.Http1xStream$ChunkedSource
+Running: 'android hooking watch class com.android.okhttp.internal.http.Http1xStream$FixedLengthSource':
+
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$FixedLengthSource.close()
+(agent) Hooking com.android.okhttp.internal.http.Http1xStream$FixedLengthSource.read(com.android.okhttp.okio.Buffer, long)
+(agent) Registering job 874414. Type: watch-class for: com.android.okhttp.internal.http.Http1xStream$FixedLengthSource
+Running: 'android hooking watch class com.android.okhttp.internal.http.HttpEngine$1':
+
+(agent) Hooking com.android.okhttp.internal.http.HttpEngine$1.contentLength()
+(agent) Hooking com.android.okhttp.internal.http.HttpEngine$1.contentType()
+(agent) Hooking com.android.okhttp.internal.http.HttpEngine$1.source()
+(agent) Registering job 925960. Type: watch-class for: com.android.okhttp.internal.http.HttpEngine$1
+Running: 'android hooking watch class com.android.okhttp.internal.http.HttpMethod':
+
+(agent) Hooking com.android.okhttp.internal.http.HttpMethod.invalidatesCache(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.http.HttpMethod.permitsRequestBody(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.http.HttpMethod.redirectsToGet(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.http.HttpMethod.requiresRequestBody(java.lang.String)
+(agent) Registering job 086767. Type: watch-class for: com.android.okhttp.internal.http.HttpMethod
+Running: 'android hooking watch class com.android.okhttp.internal.http.HttpStream':
+
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.cancel()
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.createRequestBody(com.android.okhttp.Request, long)
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.finishRequest()
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.openResponseBody(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.readResponseHeaders()
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.setHttpEngine(com.android.okhttp.internal.http.HttpEngine)
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.writeRequestBody(com.android.okhttp.internal.http.RetryableSink)
+(agent) Hooking com.android.okhttp.internal.http.HttpStream.writeRequestHeaders(com.android.okhttp.Request)
+(agent) Registering job 268699. Type: watch-class for: com.android.okhttp.internal.http.HttpStream
+Running: 'android hooking watch class com.android.okhttp.internal.http.OkHeaders$1':
+
+(agent) Hooking com.android.okhttp.internal.http.OkHeaders$1.compare(java.lang.Object, java.lang.Object)
+(agent) Hooking com.android.okhttp.internal.http.OkHeaders$1.compare(java.lang.String, java.lang.String)
+(agent) Registering job 875541. Type: watch-class for: com.android.okhttp.internal.http.OkHeaders$1
+Running: 'android hooking watch class com.android.okhttp.internal.http.RealResponseBody':
+
+(agent) Hooking com.android.okhttp.internal.http.RealResponseBody.contentLength()
+(agent) Hooking com.android.okhttp.internal.http.RealResponseBody.contentType()
+(agent) Hooking com.android.okhttp.internal.http.RealResponseBody.source()
+(agent) Registering job 667471. Type: watch-class for: com.android.okhttp.internal.http.RealResponseBody
+Running: 'android hooking watch class com.android.okhttp.internal.http.RequestException':
+
+(agent) Hooking com.android.okhttp.internal.http.RequestException.getCause()
+(agent) Hooking com.android.okhttp.internal.http.RequestException.getCause()
+(agent) Registering job 844853. Type: watch-class for: com.android.okhttp.internal.http.RequestException
+Running: 'android hooking watch class com.android.okhttp.internal.http.RequestLine':
+
+(agent) Hooking com.android.okhttp.internal.http.RequestLine.get(com.android.okhttp.Request, java.net.Proxy$Type)
+(agent) Hooking com.android.okhttp.internal.http.RequestLine.includeAuthorityInRequestLine(com.android.okhttp.Request, java.net.Proxy$Type)                                                                                                                           
+(agent) Hooking com.android.okhttp.internal.http.RequestLine.requestPath(com.android.okhttp.HttpUrl)
+(agent) Registering job 646362. Type: watch-class for: com.android.okhttp.internal.http.RequestLine
+Running: 'android hooking watch class com.android.okhttp.internal.http.RetryableSink':
+
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.close()
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.contentLength()
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.flush()
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.timeout()
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.write(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.internal.http.RetryableSink.writeToSocket(com.android.okhttp.okio.Sink)
+(agent) Registering job 298946. Type: watch-class for: com.android.okhttp.internal.http.RetryableSink
+Running: 'android hooking watch class com.android.okhttp.internal.http.RouteSelector':
+
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.getHostString(java.net.InetSocketAddress)
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.hasNextInetSocketAddress()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.hasNextPostponed()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.hasNextProxy()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.nextInetSocketAddress()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.nextPostponed()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.nextProxy()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.resetNextInetSocketAddress(java.net.Proxy)
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.resetNextProxy(com.android.okhttp.HttpUrl, java.net.Proxy)
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.connectFailed(com.android.okhttp.Route, java.io.IOException)
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.hasNext()
+(agent) Hooking com.android.okhttp.internal.http.RouteSelector.next()
+(agent) Registering job 102282. Type: watch-class for: com.android.okhttp.internal.http.RouteSelector
+Running: 'android hooking watch class com.android.okhttp.internal.http.StatusLine':
+
+(agent) Hooking com.android.okhttp.internal.http.StatusLine.get(com.android.okhttp.Response)
+(agent) Hooking com.android.okhttp.internal.http.StatusLine.parse(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.http.StatusLine.toString()
+(agent) Registering job 748259. Type: watch-class for: com.android.okhttp.internal.http.StatusLine
+Running: 'android hooking watch class com.android.okhttp.internal.http.StreamAllocation':
+
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.connectionFailed(java.io.IOException)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.connectionFailed()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.deallocate(boolean, boolean, boolean)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.findConnection(int, int, int, boolean)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.findHealthyConnection(int, int, int, boolean, boolean)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.isRecoverable(com.android.okhttp.internal.http.RouteException)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.isRecoverable(java.io.IOException)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.release(com.android.okhttp.internal.io.RealConnection)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.release()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.routeDatabase()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.acquire(com.android.okhttp.internal.io.RealConnection)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.cancel()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.connection()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.newStream(int, int, int, boolean, boolean)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.noNewStreams()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.recover(com.android.okhttp.internal.http.RouteException)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.recover(java.io.IOException, com.android.okhttp.okio.Sink)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.stream()
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.streamFinished(com.android.okhttp.internal.http.HttpStream)
+(agent) Hooking com.android.okhttp.internal.http.StreamAllocation.toString()
+(agent) Registering job 989279. Type: watch-class for: com.android.okhttp.internal.http.StreamAllocation
+Running: 'android hooking watch class com.android.okhttp.internal.huc.DelegatingHttpsURLConnection':
+
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.addRequestProperty(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.connect()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.disconnect()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getAllowUserInteraction()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getCipherSuite()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getConnectTimeout()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getContent()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getContent([Ljava.lang.Class;)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getContentEncoding()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getContentLength()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getContentType()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getDate()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getDefaultUseCaches()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getDoInput()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getDoOutput()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getErrorStream()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getExpiration()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderField(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderField(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderFieldDate(java.lang.String, long)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderFieldInt(java.lang.String, int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderFieldKey(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHeaderFields()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getHostnameVerifier()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getIfModifiedSince()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getInputStream()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getInstanceFollowRedirects()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getLastModified()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getLocalCertificates()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getLocalPrincipal()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getOutputStream()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getPeerPrincipal()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getPermission()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getReadTimeout()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getRequestMethod()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getRequestProperties()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getRequestProperty(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getResponseCode()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getResponseMessage()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getSSLSocketFactory()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getServerCertificates()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getURL()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getUseCaches()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.handshake()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setAllowUserInteraction(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setChunkedStreamingMode(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setConnectTimeout(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setDefaultUseCaches(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setDoInput(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setDoOutput(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setFixedLengthStreamingMode(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setHostnameVerifier(javax.net.ssl.HostnameVerifier)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setIfModifiedSince(long)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setInstanceFollowRedirects(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setReadTimeout(int)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setRequestMethod(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setRequestProperty(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setSSLSocketFactory(javax.net.ssl.SSLSocketFactory)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.setUseCaches(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.toString()
+(agent) Hooking com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.usingProxy()
+(agent) Registering job 550375. Type: watch-class for: com.android.okhttp.internal.huc.DelegatingHttpsURLConnection
+Running: 'android hooking watch class com.android.okhttp.internal.huc.HttpsURLConnectionImpl':
+
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.addRequestProperty(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.connect()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.disconnect()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getAllowUserInteraction()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getCipherSuite()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getConnectTimeout()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContent()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContent([Ljava.lang.Class;)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContentEncoding()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContentLength()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContentLengthLong()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getContentType()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getDate()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getDefaultUseCaches()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getDoInput()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getDoOutput()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getErrorStream()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getExpiration()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderField(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderField(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderFieldDate(java.lang.String, long)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderFieldInt(java.lang.String, int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderFieldKey(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderFieldLong(java.lang.String, long)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHeaderFields()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getHostnameVerifier()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getIfModifiedSince()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getInputStream()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getInstanceFollowRedirects()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getLastModified()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getLocalCertificates()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getLocalPrincipal()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getOutputStream()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getPeerPrincipal()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getPermission()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getReadTimeout()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getRequestMethod()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getRequestProperties()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getRequestProperty(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getResponseCode()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getResponseMessage()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getSSLSocketFactory()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getServerCertificates()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getURL()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getUseCaches()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.handshake()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setAllowUserInteraction(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setChunkedStreamingMode(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setConnectTimeout(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setDefaultUseCaches(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setDoInput(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setDoOutput(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setFixedLengthStreamingMode(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setFixedLengthStreamingMode(long)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setHostnameVerifier(javax.net.ssl.HostnameVerifier)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setIfModifiedSince(long)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setInstanceFollowRedirects(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setReadTimeout(int)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setRequestMethod(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setRequestProperty(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setSSLSocketFactory(javax.net.ssl.SSLSocketFactory)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.setUseCaches(boolean)
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.toString()
+(agent) Hooking com.android.okhttp.internal.huc.HttpsURLConnectionImpl.usingProxy()
+(agent) Registering job 088030. Type: watch-class for: com.android.okhttp.internal.huc.HttpsURLConnectionImpl
+Running: 'android hooking watch class com.android.okhttp.internal.tls.OkHostnameVerifier':
+
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.allSubjectAltNames(java.security.cert.X509Certificate)
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.getSubjectAltNames(java.security.cert.X509Certificate, int)
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verifyAsIpAddress(java.lang.String)
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verifyHostName(java.lang.String, java.lang.String)
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verifyHostName(java.lang.String, java.security.cert.X509Certificate)                                                                                                                               
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verifyIpAddress(java.lang.String, java.security.cert.X509Certificate)                                                                                                                              
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verify(java.lang.String, java.security.cert.X509Certificate)
+(agent) Hooking com.android.okhttp.internal.tls.OkHostnameVerifier.verify(java.lang.String, javax.net.ssl.SSLSession)
+(agent) Registering job 182054. Type: watch-class for: com.android.okhttp.internal.tls.OkHostnameVerifier
+Running: 'android hooking watch class com.android.okhttp.okio.AsyncTimeout':
+
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.-wrap0()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.awaitTimeout()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.cancelScheduledTimeout(com.android.okhttp.okio.AsyncTimeout)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.remainingNanos(long)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.scheduleTimeout(com.android.okhttp.okio.AsyncTimeout, long, boolean)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.enter()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.exit(java.io.IOException)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.exit(boolean)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.exit()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.newTimeoutException(java.io.IOException)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.sink(com.android.okhttp.okio.Sink)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.source(com.android.okhttp.okio.Source)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout.timedOut()
+(agent) Registering job 679084. Type: watch-class for: com.android.okhttp.okio.AsyncTimeout
+Running: 'android hooking watch class com.android.okhttp.okio.AsyncTimeout$1':
+
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$1.close()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$1.flush()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$1.timeout()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$1.toString()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$1.write(com.android.okhttp.okio.Buffer, long)
+(agent) Registering job 700447. Type: watch-class for: com.android.okhttp.okio.AsyncTimeout$1
+Running: 'android hooking watch class com.android.okhttp.okio.AsyncTimeout$2':
+
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$2.close()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$2.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$2.timeout()
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$2.toString()
+(agent) Registering job 609806. Type: watch-class for: com.android.okhttp.okio.AsyncTimeout$2
+Running: 'android hooking watch class com.android.okhttp.okio.AsyncTimeout$Watchdog':
+
+(agent) Hooking com.android.okhttp.okio.AsyncTimeout$Watchdog.run()
+(agent) Registering job 461017. Type: watch-class for: com.android.okhttp.okio.AsyncTimeout$Watchdog
+Running: 'android hooking watch class com.android.okhttp.okio.BufferedSink':
+
+(agent) Hooking com.android.okhttp.okio.BufferedSink.buffer()
+(agent) Hooking com.android.okhttp.okio.BufferedSink.emit()
+(agent) Hooking com.android.okhttp.okio.BufferedSink.emitCompleteSegments()
+(agent) Hooking com.android.okhttp.okio.BufferedSink.outputStream()
+(agent) Hooking com.android.okhttp.okio.BufferedSink.write(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.write(com.android.okhttp.okio.Source, long)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.write([B)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.write([B, int, int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeAll(com.android.okhttp.okio.Source)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeByte(int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeDecimalLong(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeHexadecimalUnsignedLong(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeInt(int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeIntLe(int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeLong(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeLongLe(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeShort(int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeShortLe(int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeString(java.lang.String, int, int, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeString(java.lang.String, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeUtf8(java.lang.String)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeUtf8(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.okio.BufferedSink.writeUtf8CodePoint(int)
+(agent) Registering job 818246. Type: watch-class for: com.android.okhttp.okio.BufferedSink
+Running: 'android hooking watch class com.android.okhttp.okio.BufferedSource':
+
+(agent) Hooking com.android.okhttp.okio.BufferedSource.buffer()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.exhausted()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOf(byte)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOf(byte, long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOf(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOf(com.android.okhttp.okio.ByteString, long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOfElement(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.indexOfElement(com.android.okhttp.okio.ByteString, long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.inputStream()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.read([B)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.read([B, int, int)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readAll(com.android.okhttp.okio.Sink)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readByte()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readByteArray()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readByteArray(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readByteString()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readByteString(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readDecimalLong()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readFully(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readFully([B)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readHexadecimalUnsignedLong()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readInt()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readIntLe()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readLong()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readLongLe()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readShort()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readShortLe()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readString(long, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readString(java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readUtf8()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readUtf8(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readUtf8CodePoint()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readUtf8Line()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.readUtf8LineStrict()
+(agent) Hooking com.android.okhttp.okio.BufferedSource.request(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.require(long)
+(agent) Hooking com.android.okhttp.okio.BufferedSource.skip(long)
+(agent) Registering job 271951. Type: watch-class for: com.android.okhttp.okio.BufferedSource
+Running: 'android hooking watch class com.android.okhttp.okio.ForwardingTimeout':
+
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.clearDeadline()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.clearTimeout()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.deadlineNanoTime()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.deadlineNanoTime(long)
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.delegate()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.hasDeadline()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.setDelegate(com.android.okhttp.okio.Timeout)
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.throwIfReached()
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.timeout(long, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.okio.ForwardingTimeout.timeoutNanos()
+(agent) Registering job 539086. Type: watch-class for: com.android.okhttp.okio.ForwardingTimeout
+Running: 'android hooking watch class com.android.okhttp.okio.GzipSource':
+
+(agent) Hooking com.android.okhttp.okio.GzipSource.checkEqual(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.okio.GzipSource.consumeHeader()
+(agent) Hooking com.android.okhttp.okio.GzipSource.consumeTrailer()
+(agent) Hooking com.android.okhttp.okio.GzipSource.updateCrc(com.android.okhttp.okio.Buffer, long, long)
+(agent) Hooking com.android.okhttp.okio.GzipSource.close()
+(agent) Hooking com.android.okhttp.okio.GzipSource.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.GzipSource.timeout()
+(agent) Registering job 141964. Type: watch-class for: com.android.okhttp.okio.GzipSource
+Running: 'android hooking watch class com.android.okhttp.okio.InflaterSource':
+
+(agent) Hooking com.android.okhttp.okio.InflaterSource.releaseInflatedBytes()
+(agent) Hooking com.android.okhttp.okio.InflaterSource.close()
+(agent) Hooking com.android.okhttp.okio.InflaterSource.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.InflaterSource.refill()
+(agent) Hooking com.android.okhttp.okio.InflaterSource.timeout()
+(agent) Registering job 905372. Type: watch-class for: com.android.okhttp.okio.InflaterSource
+Running: 'android hooking watch class com.android.okhttp.okio.Okio$1':
+
+(agent) Hooking com.android.okhttp.okio.Okio$1.close()
+(agent) Hooking com.android.okhttp.okio.Okio$1.flush()
+(agent) Hooking com.android.okhttp.okio.Okio$1.timeout()
+(agent) Hooking com.android.okhttp.okio.Okio$1.toString()
+(agent) Hooking com.android.okhttp.okio.Okio$1.write(com.android.okhttp.okio.Buffer, long)
+(agent) Registering job 365960. Type: watch-class for: com.android.okhttp.okio.Okio$1
+Running: 'android hooking watch class com.android.okhttp.okio.Okio$2':
+
+(agent) Hooking com.android.okhttp.okio.Okio$2.close()
+(agent) Hooking com.android.okhttp.okio.Okio$2.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.Okio$2.timeout()
+(agent) Hooking com.android.okhttp.okio.Okio$2.toString()
+(agent) Registering job 813839. Type: watch-class for: com.android.okhttp.okio.Okio$2
+Running: 'android hooking watch class com.android.okhttp.okio.Okio$3':
+
+(agent) Hooking com.android.okhttp.okio.Okio$3.newTimeoutException(java.io.IOException)
+(agent) Hooking com.android.okhttp.okio.Okio$3.timedOut()
+(agent) Registering job 594358. Type: watch-class for: com.android.okhttp.okio.Okio$3
+Running: 'android hooking watch class com.android.okhttp.okio.RealBufferedSink':
+
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.-get0(com.android.okhttp.okio.RealBufferedSink)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.buffer()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.close()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.emit()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.emitCompleteSegments()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.flush()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.outputStream()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.timeout()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.toString()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.write(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.write(com.android.okhttp.okio.Source, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.write([B)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.write([B, int, int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.write(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeAll(com.android.okhttp.okio.Source)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeByte(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeDecimalLong(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeHexadecimalUnsignedLong(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeInt(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeIntLe(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeLong(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeLongLe(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeShort(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeShortLe(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeString(java.lang.String, int, int, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeString(java.lang.String, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeUtf8(java.lang.String)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeUtf8(java.lang.String, int, int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink.writeUtf8CodePoint(int)
+(agent) Registering job 761011. Type: watch-class for: com.android.okhttp.okio.RealBufferedSink
+Running: 'android hooking watch class com.android.okhttp.okio.RealBufferedSink$1':
+
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink$1.close()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink$1.flush()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink$1.toString()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink$1.write(int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSink$1.write([B, int, int)
+(agent) Registering job 536041. Type: watch-class for: com.android.okhttp.okio.RealBufferedSink$1
+Running: 'android hooking watch class com.android.okhttp.okio.RealBufferedSource':
+
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.-get0(com.android.okhttp.okio.RealBufferedSource)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.rangeEquals(long, com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.buffer()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.close()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.exhausted()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOf(byte)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOf(byte, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOf(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOf(com.android.okhttp.okio.ByteString, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOfElement(com.android.okhttp.okio.ByteString)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.indexOfElement(com.android.okhttp.okio.ByteString, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.inputStream()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.read([B)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.read([B, int, int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readAll(com.android.okhttp.okio.Sink)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readByte()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readByteArray()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readByteArray(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readByteString()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readByteString(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readDecimalLong()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readFully(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readFully([B)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readHexadecimalUnsignedLong()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readInt()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readIntLe()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readLong()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readLongLe()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readShort()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readShortLe()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readString(long, java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readString(java.nio.charset.Charset)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readUtf8()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readUtf8(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readUtf8CodePoint()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readUtf8Line()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.readUtf8LineStrict()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.request(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.require(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.skip(long)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.timeout()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource.toString()
+(agent) Registering job 499639. Type: watch-class for: com.android.okhttp.okio.RealBufferedSource
+Running: 'android hooking watch class com.android.okhttp.okio.RealBufferedSource$1':
+
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource$1.available()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource$1.close()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource$1.read()
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource$1.read([B, int, int)
+(agent) Hooking com.android.okhttp.okio.RealBufferedSource$1.toString()
+(agent) Registering job 755692. Type: watch-class for: com.android.okhttp.okio.RealBufferedSource$1
+Running: 'android hooking watch class com.android.okhttp.okio.Segment':
+
+(agent) Hooking com.android.okhttp.okio.Segment.compact()
+(agent) Hooking com.android.okhttp.okio.Segment.pop()
+(agent) Hooking com.android.okhttp.okio.Segment.push(com.android.okhttp.okio.Segment)
+(agent) Hooking com.android.okhttp.okio.Segment.split(int)
+(agent) Hooking com.android.okhttp.okio.Segment.writeTo(com.android.okhttp.okio.Segment, int)
+(agent) Registering job 125797. Type: watch-class for: com.android.okhttp.okio.Segment
+Running: 'android hooking watch class com.android.okhttp.okio.Sink':
+
+(agent) Hooking com.android.okhttp.okio.Sink.close()
+(agent) Hooking com.android.okhttp.okio.Sink.flush()
+(agent) Hooking com.android.okhttp.okio.Sink.timeout()
+(agent) Hooking com.android.okhttp.okio.Sink.write(com.android.okhttp.okio.Buffer, long)
+(agent) Registering job 850341. Type: watch-class for: com.android.okhttp.okio.Sink
+Running: 'android hooking watch class com.android.okhttp.okio.Source':
+
+(agent) Hooking com.android.okhttp.okio.Source.close()
+(agent) Hooking com.android.okhttp.okio.Source.read(com.android.okhttp.okio.Buffer, long)
+(agent) Hooking com.android.okhttp.okio.Source.timeout()
+(agent) Registering job 231513. Type: watch-class for: com.android.okhttp.okio.Source
+Running: 'android hooking watch class com.android.okhttp.okio.Timeout':
+
+(agent) Hooking com.android.okhttp.okio.Timeout.clearDeadline()
+(agent) Hooking com.android.okhttp.okio.Timeout.clearTimeout()
+(agent) Hooking com.android.okhttp.okio.Timeout.deadline(long, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.okio.Timeout.deadlineNanoTime()
+(agent) Hooking com.android.okhttp.okio.Timeout.deadlineNanoTime(long)
+(agent) Hooking com.android.okhttp.okio.Timeout.hasDeadline()
+(agent) Hooking com.android.okhttp.okio.Timeout.throwIfReached()
+(agent) Hooking com.android.okhttp.okio.Timeout.timeout(long, java.util.concurrent.TimeUnit)
+(agent) Hooking com.android.okhttp.okio.Timeout.timeoutNanos()
+(agent) Registering job 191631. Type: watch-class for: com.android.okhttp.okio.Timeout
+Running: 'android hooking watch class com.android.okhttp.okio.Timeout$1':
+
+(agent) Hooking com.android.okhttp.okio.Timeout$1.deadlineNanoTime(long)
+(agent) Hooking com.android.okhttp.okio.Timeout$1.throwIfReached()
+(agent) Hooking com.android.okhttp.okio.Timeout$1.timeout(long, java.util.concurrent.TimeUnit)
+(agent) Registering job 089873. Type: watch-class for: com.android.okhttp.okio.Timeout$1
+Running: 'android hooking watch class com.bumptech.glide.integration.okhttp3.OkHttpGlideModule':
+
+(agent) Hooking com.bumptech.glide.integration.okhttp3.OkHttpGlideModule.a(android.content.Context, h.c.a.c)
+(agent) Hooking com.bumptech.glide.integration.okhttp3.OkHttpGlideModule.b(android.content.Context, h.c.a.b, com.bumptech.glide.Registry)                                                                                                                             
+(agent) Registering job 594721. Type: watch-class for: com.bumptech.glide.integration.okhttp3.OkHttpGlideModule
+Running: 'android hooking watch class okhttp3.Protocol':
+
+(agent) Hooking okhttp3.Protocol.get(java.lang.String)
+(agent) Hooking okhttp3.Protocol.valueOf(java.lang.String)
+(agent) Hooking okhttp3.Protocol.valueOf()
+(agent) Hooking okhttp3.Protocol.values()
+(agent) Hooking okhttp3.Protocol.toString()
+(agent) Registering job 931586. Type: watch-class for: okhttp3.Protocol
+Running: 'android hooking watch class okhttp3.TlsVersion':
+
+(agent) Hooking okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) Hooking okhttp3.TlsVersion.forJavaNames([Ljava.lang.String;)
+(agent) Hooking okhttp3.TlsVersion.valueOf(java.lang.String)
+(agent) Hooking okhttp3.TlsVersion.valueOf()
+(agent) Hooking okhttp3.TlsVersion.values()
+(agent) Hooking okhttp3.TlsVersion.javaName()
+(agent) Registering job 542386. Type: watch-class for: okhttp3.TlsVersion
+Running: 'android hooking watch class okhttp3.internal.connection.RouteException':
+
+(agent) Hooking okhttp3.internal.connection.RouteException.a(java.io.IOException)
+(agent) Hooking okhttp3.internal.connection.RouteException.b()
+(agent) Hooking okhttp3.internal.connection.RouteException.c()
+(agent) Registering job 204865. Type: watch-class for: okhttp3.internal.connection.RouteException
+
+     _   _         _   _
+ ___| |_|_|___ ___| |_|_|___ ___
+| . | . | | -_|  _|  _| | . |   |
+|___|___| |___|___|_| |_|___|_|_|
+      |___|(object)inject(ion) v1.11.0
+
+     Runtime Mobile Exploration
+        by: @leonjza from @sensepost
+
+[tab] for command suggestions
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # (agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [204865] Called okhttp3.internal.connection.RouteException.c()
+(agent) [204865] Called okhttp3.internal.connection.RouteException.b()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [931586] Called okhttp3.Protocol.toString()
+(agent) [542386] Called okhttp3.TlsVersion.forJavaName(java.lang.String)
+(agent) [931586] Called okhttp3.Protocol.get(java.lang.String)
+(agent) [204865] Called okhttp3.internal.connection.RouteException.c()
+(agent) [204865] Called okhttp3.internal.connection.RouteException.b()
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # 
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # exit
+Exiting...
+Asking jobs to stop...
+Unloading objection agent...
+                         
+```
+
+然后进行单一Hook
+
+```
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # android hooking watch class_method okhttp3.Protocol.toString --dump-args --dump-
+backtrace --dump-return
+(agent) Attempting to watch class okhttp3.Protocol and method toString.
+(agent) Hooking okhttp3.Protocol.toString()
+(agent) Registering job 931459. Type: watch-method for: okhttp3.Protocol.toString
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # (agent) [931459] Called okhttp3.Protocol.toString()
+(agent) [931459] Backtrace:
+        okhttp3.Protocol.toString(Native Method)
+        r.k0.m.f.e(Platform.java:5)
+        r.k0.m.b.g(AndroidPlatform.java:4)
+        r.k0.h.f.f(RealConnection.java:10)
+        r.k0.h.f.j(RealConnection.java:9)
+        r.k0.h.f.d(RealConnection.java:15)
+        r.k0.h.e.c(ExchangeFinder.java:30)
+        r.k0.h.e.d(ExchangeFinder.java:1)
+        r.k0.h.e.b(ExchangeFinder.java:6)
+        r.k0.h.j.k(Transmitter.java:5)
+        r.k0.h.b.a(ConnectInterceptor.java:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.h(ProGuard:12)
+        com.tencent.open.b$h$e.run(ProGuard:5)
+        h.o.m.f.j$b$a.run(ProGuard:1)
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+        java.lang.Thread.run(Thread.java:764)
+
+(agent) [931459] Return Value: h2
+(agent) [931459] Called okhttp3.Protocol.toString()
+(agent) [931459] Backtrace:
+        okhttp3.Protocol.toString(Native Method)
+        r.k0.m.f.e(Platform.java:6)
+        r.k0.m.b.g(AndroidPlatform.java:4)
+        r.k0.h.f.f(RealConnection.java:10)
+        r.k0.h.f.j(RealConnection.java:9)
+        r.k0.h.f.d(RealConnection.java:15)
+        r.k0.h.e.c(ExchangeFinder.java:30)
+        r.k0.h.e.d(ExchangeFinder.java:1)
+        r.k0.h.e.b(ExchangeFinder.java:6)
+        r.k0.h.j.k(Transmitter.java:5)
+        r.k0.h.b.a(ConnectInterceptor.java:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.h(ProGuard:12)
+        com.tencent.open.b$h$e.run(ProGuard:5)
+        h.o.m.f.j$b$a.run(ProGuard:1)
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+        java.lang.Thread.run(Thread.java:764)
+
+(agent) [931459] Return Value: h2
+(agent) [931459] Called okhttp3.Protocol.toString()
+(agent) [931459] Backtrace:
+        okhttp3.Protocol.toString(Native Method)
+        r.k0.m.f.e(Platform.java:5)
+        r.k0.m.b.g(AndroidPlatform.java:4)
+        r.k0.h.f.f(RealConnection.java:10)
+        r.k0.h.f.j(RealConnection.java:9)
+        r.k0.h.f.d(RealConnection.java:15)
+        r.k0.h.e.c(ExchangeFinder.java:30)
+        r.k0.h.e.d(ExchangeFinder.java:1)
+        r.k0.h.e.b(ExchangeFinder.java:6)
+        r.k0.h.j.k(Transmitter.java:5)
+        r.k0.h.b.a(ConnectInterceptor.java:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.h(ProGuard:12)
+        com.tencent.open.b$h$e.run(ProGuard:5)
+        h.o.m.f.j$b$a.run(ProGuard:1)
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+        java.lang.Thread.run(Thread.java:764)
+
+```
+
+```
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # android hooking watch class_method r.k0.h.b.a  --dump-args --dump-backtrace --du
+mp-return
+(agent) Attempting to watch class r.k0.h.b and method a.
+(agent) Hooking r.k0.h.b.a(r.a0$a)
+(agent) Registering job 009630. Type: watch-method for: r.k0.h.b.a
+com.tencent.qqmusiclite on (google: 8.1.0) [usb] # (agent) [009630] Called r.k0.h.b.a(r.a0$a)
+(agent) [009630] Backtrace:
+        r.k0.h.b.a(Native Method)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.h(ProGuard:12)
+        com.tencent.open.b$c.m(ProGuard:2)
+        com.tencent.open.b$c.n(ProGuard:11)
+        com.tencent.open.b$c.l(ProGuard:1)
+        com.tencent.open.b$c$a.run(ProGuard:4)
+        h.o.m.f.j$b$a.run(ProGuard:1)
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+        java.lang.Thread.run(Thread.java:764)
+
+(agent) [009630] Arguments r.k0.h.b.a([object Object])
+(agent) [009630] Called r.k0.h.b.a(r.a0$a)
+(agent) [009630] Backtrace:
+        r.k0.h.b.a(Native Method)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.b(ProGuard:9)
+        h.o.m.a$c.c(ProGuard:12)
+        com.tencent.open.b$h$f.run(ProGuard:3)
+        android.os.Handler.handleCallback(Handler.java:790)
+        android.os.Handler.dispatchMessage(Handler.java:99)
+        android.os.Looper.loop(Looper.java:164)
+        android.os.HandlerThread.run(HandlerThread.java:65)
+
+(agent) [009630] Arguments r.k0.h.b.a([object Object])
+(agent) [009630] Return Value: Response{protocol=h2, code=200, message=, url=https://h.trace.qq.com/kv}
+(agent) [009630] Called r.k0.h.b.a(r.a0$a)
+(agent) [009630] Backtrace:
+        r.k0.h.b.a(Native Method)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.g.a.a(CacheInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.k0.i.a.a(BridgeInterceptor.java:22)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.j.a(RetryAndFollowUpInterceptor.java:6)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        h.o.m.a$c$a.a(ProGuard:5)
+        r.k0.i.g.g(RealInterceptorChain.java:9)
+        r.k0.i.g.c(RealInterceptorChain.java:1)
+        r.e0.e(RealCall.java:13)
+        r.e0.z(RealCall.java:8)
+        h.o.m.a$c.h(ProGuard:12)
+        com.tencent.open.b$h$e.run(ProGuard:5)
+        h.o.m.f.j$b$a.run(ProGuard:1)
+        java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+        java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+        java.lang.Thread.run(Thread.java:764)
+
+(agent) [009630] Arguments r.k0.h.b.a([object Object])
+(agent) [009630] Return Value: Response{protocol=http/1.1, code=200, message=OK, url=https://appsupport.qq.com/cgi-bin/appstage/mstats_batch_report}                                                                                                                  
+(agent) [009630] Called r.k0.h.b.a(r.a0$a)
+
+```
+
+对于无意义的字符如何抗混淆在《安卓Frida逆向与抓包》p241
