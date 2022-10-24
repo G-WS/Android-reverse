@@ -1518,3 +1518,10 @@ c++filt _Z52Java_com_example_jnitest_MainActivity_stringFromJNI2P7_JNIEnvP8_jobj
 
 ```
 
+但是报了一个不理解的错误
+
+```
+zsh: unknown file attribute: _
+在博客中搜索时说有可能是spark-shell的问题，后面再看看
+```
+
