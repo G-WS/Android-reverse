@@ -34,7 +34,7 @@ apt install ttf-wqy-microhei
 然后配置python的隔离，这里选用miniconda，因为pyenv工具的最后一步解决依赖包的问题一直很棘手，甚至可能会导致系统桌面环境崩溃
 
 ```
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x84_64.sh 
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 
 #下载安装脚本
 
 #赋予安装脚本可执行的权限
